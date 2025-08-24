@@ -1,0 +1,22 @@
+{
+  "startups": [
+    {
+      "name": "MauriPay",
+      "logo": "https://images.pexels.com/photos/3184360/pexels-photo-3184360.jpeg?auto=compress&cs=tinysrgb&w=200",
+      "description": "Solution de paiement mobile révolutionnaire pour la Mauritanie, permettant des transactions sécurisées et instantanées.",
+      "url": "https://mauripay.mr"
+    },
+    {
+      "name": "EduMauri",
+      "logo": "https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg?auto=compress&cs=tinysrgb&w=200",
+      "description": "Plateforme d'apprentissage en ligne adaptée au contexte mauritanien, offrant des cours en arabe et en français.",
+      "url": "https://edumauri.com"
+    },
+    {
+      "name": "HealthConnect",
+      "logo": "https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg?auto=compress&cs=tinysrgb&w=200",
+      "description": "Application de télémédecine connectant patients et médecins en Mauritanie pour un accès facilité aux soins de santé.",
+      "url": "https://healthconnect.mr"
+    }
+  ]
+}

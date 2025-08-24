@@ -15,14 +15,12 @@ export const useDynamicContent = (collection: string) => {
         setLoading(true);
         setError(null);
 
-        // Try to fetch the collection data
-        const response = await fetch(`/data/${collection}/`);
+        // Add cache busting parameter
+        const cacheBuster = `?v=${Date.now()}`;
+        const response = await fetch(`/data/${collection}.json${cacheBuster}`);
         
         if (!response.ok) {
-          // If direct folder access fails, try to load individual files
-          // This is a fallback for when we can't list directory contents
-          setData([]);
-          return;
+          throw new Error(`Failed to load ${collection}: ${response.status}`);
         }
 
         const text = await response.text();
@@ -30,22 +28,52 @@ export const useDynamicContent = (collection: string) => {
         // Check if we got HTML instead of JSON (404 page)
         if (text.trim().startsWith('<!DOCTYPE html>') || text.trim().startsWith('<html')) {
           console.warn(`Got HTML response for ${collection}, using fallback data`);
-          setData([]);
+          setData(getFallbackData(collection));
           return;
         }
 
         try {
           const jsonData = JSON.parse(text);
-          setData(Array.isArray(jsonData) ? jsonData : [jsonData]);
+          
+          // Extract the array from the JSON structure based on collection type
+          let items: ContentItem[] = [];
+          
+          switch (collection) {
+            case 'startups':
+              items = jsonData.startups || [];
+              break;
+            case 'events':
+              items = jsonData.events || [];
+              break;
+            case 'news':
+              items = jsonData.articles || [];
+              break;
+            case 'partners':
+              items = jsonData.partners || [];
+              break;
+            case 'resources':
+              items = jsonData.resources || [];
+              break;
+            default:
+              items = Array.isArray(jsonData) ? jsonData : [jsonData];
+          }
+          
+          // Add unique IDs if not present
+          const itemsWithIds = items.map((item, index) => ({
+            ...item,
+            id: item.id || `${collection}-${index}`
+          }));
+          
+          setData(itemsWithIds);
         } catch (parseError) {
-          console.warn(`Failed to parse JSON for ${collection}:`, parseError);
-          setData([]);
+          console.error(`Failed to parse JSON for ${collection}:`, parseError);
+          setData(getFallbackData(collection));
         }
 
       } catch (err) {
         console.error(`Error loading ${collection}:`, err);
         setError(err instanceof Error ? err.message : 'Unknown error');
-        setData([]);
+        setData(getFallbackData(collection));
       } finally {
         setLoading(false);
       }
@@ -54,58 +82,69 @@ export const useDynamicContent = (collection: string) => {
     loadContent();
   }, [collection]);
 
-  return { data, loading, error, refetch: () => loadContent() };
-};
+  const refetch = () => {
+    loadContent();
+  };
 
-// Hook for loading markdown files from collections
-export const useMarkdownCollection = (collection: string) => {
-  const [data, setData] = useState<ContentItem[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-
-  useEffect(() => {
-    const loadMarkdownFiles = async () => {
-      try {
-        setLoading(true);
-        setError(null);
-
-        // For now, we'll use static data as a fallback
-        // In a real implementation, you'd need a way to list files in the directory
-        const fallbackData = getFallbackData(collection);
-        setData(fallbackData);
-
-      } catch (err) {
-        console.error(`Error loading ${collection}:`, err);
-        setError(err instanceof Error ? err.message : 'Unknown error');
-        setData([]);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    loadMarkdownFiles();
-  }, [collection]);
-
-  return { data, loading, error };
+  return { data, loading, error, refetch };
 };
 
 // Fallback data for when dynamic loading fails
 const getFallbackData = (collection: string): ContentItem[] => {
   switch (collection) {
     case 'startups':
-      return [];
+      return [
+        {
+          id: 'fallback-startup-1',
+          name: 'Startup Example',
+          logo: 'https://images.pexels.com/photos/3184360/pexels-photo-3184360.jpeg?auto=compress&cs=tinysrgb&w=200',
+          description: 'Description de la startup exemple',
+          url: 'https://example.com'
+        }
+      ];
 
     case 'events':
-      return [];
+      return [
+        {
+          id: 'fallback-event-1',
+          title: 'Événement Exemple',
+          date: '2025-03-15T09:00:00.000Z',
+          location: 'Nouakchott',
+          description: 'Description de l\'événement exemple'
+        }
+      ];
 
     case 'news':
-      return [];
+      return [
+        {
+          id: 'fallback-news-1',
+          title: 'Article Exemple',
+          date: '2025-01-15T10:00:00.000Z',
+          image: 'https://images.pexels.com/photos/3184360/pexels-photo-3184360.jpeg?auto=compress&cs=tinysrgb&w=800',
+          content: 'Contenu de l\'article exemple'
+        }
+      ];
 
     case 'partners':
-      return [];
+      return [
+        {
+          id: 'fallback-partner-1',
+          name: 'Partenaire Exemple',
+          logo: 'https://images.pexels.com/photos/3184360/pexels-photo-3184360.jpeg?auto=compress&cs=tinysrgb&w=200',
+          url: 'https://example.com'
+        }
+      ];
 
     case 'resources':
-      return [];
+      return [
+        {
+          id: 'fallback-resource-1',
+          title: 'Ressource Exemple',
+          type: 'PDF',
+          file: '/example.pdf',
+          description: 'Description de la ressource exemple'
+        }
+      ];
 
     default:
       return [];

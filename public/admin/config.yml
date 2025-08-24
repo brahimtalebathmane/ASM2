@@ -65,80 +65,82 @@ collections:
 
   - name: "startups"
     label: "Startups"
-    folder: "public/data/startups"
-    create: true
-    delete: true
-    slug: "{{slug}}"
-    fields:
-      - {label: "Name", name: "name", widget: "string"}
-      - {label: "Sector", name: "sector", widget: "select", options: ["FinTech", "EdTech", "HealthTech", "AgriTech", "E-commerce", "SaaS"]}
-      - {label: "Description", name: "description", widget: "text"}
-      - {label: "Founder", name: "founder", widget: "string"}
-      - {label: "Employees", name: "employees", widget: "string"}
-      - {label: "Location", name: "location", widget: "string"}
-      - {label: "Website", name: "website", widget: "string"}
-      - {label: "Logo", name: "logo", widget: "image"}
+    files:
+      - file: "public/data/startups.json"
+        label: "Startups Collection"
+        name: "startups"
+        fields:
+          - label: "Startups"
+            name: "startups"
+            widget: "list"
+            fields:
+              - {label: "Name", name: "name", widget: "string"}
+              - {label: "Logo", name: "logo", widget: "image"}
+              - {label: "Description", name: "description", widget: "text"}
+              - {label: "URL", name: "url", widget: "string"}
 
   - name: "events"
     label: "Events"
-    folder: "public/data/events"
-    create: true
-    delete: true
-    slug: "{{slug}}"
-    fields:
-      - {label: "Title", name: "title", widget: "string"}
-      - {label: "Date", name: "date", widget: "string"}
-      - {label: "Time", name: "time", widget: "string", required: false}
-      - {label: "Location", name: "location", widget: "string"}
-      - {label: "Attendees", name: "attendees", widget: "string"}
-      - {label: "Type", name: "type", widget: "select", options: ["Conférence", "Atelier", "Hackathon", "Pitch", "Formation"]}
-      - {label: "Description", name: "description", widget: "text"}
-      - {label: "Image", name: "image", widget: "image"}
-      - {label: "Status", name: "status", widget: "select", options: ["upcoming", "past"], default: "upcoming"}
+    files:
+      - file: "public/data/events.json"
+        label: "Events Collection"
+        name: "events"
+        fields:
+          - label: "Events"
+            name: "events"
+            widget: "list"
+            fields:
+              - {label: "Title", name: "title", widget: "string"}
+              - {label: "Date", name: "date", widget: "datetime"}
+              - {label: "Location", name: "location", widget: "string"}
+              - {label: "Description", name: "description", widget: "markdown"}
 
   - name: "news"
     label: "News & Articles"
-    folder: "public/data/news"
-    create: true
-    delete: true
-    slug: "{{slug}}"
-    fields:
-      - {label: "Title", name: "title", widget: "string"}
-      - {label: "Category", name: "category", widget: "select", options: ["Innovations", "Financements", "Événements", "Portraits"]}
-      - {label: "Excerpt", name: "excerpt", widget: "text"}
-      - {label: "Author", name: "author", widget: "string"}
-      - {label: "Date", name: "date", widget: "string"}
-      - {label: "Read Time", name: "readTime", widget: "string"}
-      - {label: "Image", name: "image", widget: "image"}
-      - {label: "Featured", name: "featured", widget: "boolean", default: false}
-      - {label: "Content", name: "body", widget: "markdown"}
+    files:
+      - file: "public/data/news.json"
+        label: "News Collection"
+        name: "news"
+        fields:
+          - label: "Articles"
+            name: "articles"
+            widget: "list"
+            fields:
+              - {label: "Title", name: "title", widget: "string"}
+              - {label: "Date", name: "date", widget: "datetime"}
+              - {label: "Image", name: "image", widget: "image"}
+              - {label: "Content", name: "content", widget: "markdown"}
 
   - name: "partners"
     label: "Partners"
-    folder: "public/data/partners"
-    create: true
-    delete: true
-    slug: "{{slug}}"
-    fields:
-      - {label: "Name", name: "name", widget: "string"}
-      - {label: "Logo", name: "logo", widget: "image"}
-      - {label: "Category", name: "category", widget: "select", options: ["Financier", "Académique", "Institutionnel", "Incubateur", "Télécoms"]}
-      - {label: "Description", name: "description", widget: "text"}
+    files:
+      - file: "public/data/partners.json"
+        label: "Partners Collection"
+        name: "partners"
+        fields:
+          - label: "Partners"
+            name: "partners"
+            widget: "list"
+            fields:
+              - {label: "Name", name: "name", widget: "string"}
+              - {label: "Logo", name: "logo", widget: "image"}
+              - {label: "URL", name: "url", widget: "string"}
 
   - name: "resources"
     label: "Resources"
-    folder: "public/data/resources"
-    create: true
-    delete: true
-    slug: "{{slug}}"
-    fields:
-      - {label: "Title", name: "title", widget: "string"}
-      - {label: "Category", name: "category", widget: "select", options: ["Guides", "Financements", "Juridique", "Marketing", "Technique"]}
-      - {label: "Type", name: "type", widget: "select", options: ["PDF", "DOCX", "XLSX"]}
-      - {label: "Size", name: "size", widget: "string"}
-      - {label: "Downloads", name: "downloads", widget: "number"}
-      - {label: "Description", name: "description", widget: "text"}
-      - {label: "File", name: "file", widget: "file"}
+    files:
+      - file: "public/data/resources.json"
+        label: "Resources Collection"
+        name: "resources"
+        fields:
+          - label: "Resources"
+            name: "resources"
+            widget: "list"
+            fields:
+              - {label: "Title", name: "title", widget: "string"}
+              - {label: "Type", name: "type", widget: "string"}
+              - {label: "File", name: "file", widget: "file"}
+              - {label: "Description", name: "description", widget: "text"}
 
   - name: "pages"
     label: "Pages"

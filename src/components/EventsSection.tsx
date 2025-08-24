@@ -106,7 +106,7 @@ const EventsSection = () => {
                 {/* Content */}
                 <div className="p-6">
                   <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-emerald-600 transition-colors">
-                    {event.title}
+                    <span>{new Date(event.date).toLocaleDateString('fr-FR')}</span>
                   </h3>
                   
                   <p className="text-gray-600 mb-4 line-clamp-2">
@@ -126,28 +126,21 @@ const EventsSection = () => {
                         <span>{event.time}</span>
                       </div>
                     )}
-                    
-                    <div className="flex items-center space-x-2 text-sm text-gray-600">
-                      <MapPin className="w-4 h-4 text-emerald-500" />
-                      <span>{event.location}</span>
-                    </div>
-                    
+                  <div className="flex items-center space-x-2 text-sm text-gray-600">
+                    <Clock className="w-4 h-4 text-emerald-500" />
+                    <span>{new Date(event.date).toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' })}</span>
+                  </div>
                     <div className="flex items-center space-x-2 text-sm text-gray-600">
                       <Users className="w-4 h-4 text-emerald-500" />
                       <span>{event.attendees} participants</span>
                     </div>
                   </div>
 
-                  {/* CTA */}
-                  <button className="group/btn w-full bg-gradient-to-r from-emerald-500 to-teal-600 text-white py-3 rounded-lg font-semibold hover:from-emerald-600 hover:to-teal-700 transition-all duration-300 shadow-lg hover:shadow-xl flex items-center justify-center space-x-2">
-                    <span>{activeTab === 'upcoming' ? 'S\'inscrire' : 'Voir plus'}</span>
-                    <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
-                  </button>
                 </div>
               </div>
             ))}
           </div>
-        )}
+                  <span>En savoir plus</span>
 
         {/* Newsletter CTA */}
         <div className="mt-16 bg-gradient-to-r from-blue-900 to-blue-800 rounded-3xl p-12 text-white text-center">

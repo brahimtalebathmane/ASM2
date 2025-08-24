@@ -1,0 +1,22 @@
+{
+  "resources": [
+    {
+      "title": "Guide complet : Créer sa startup en Mauritanie",
+      "type": "PDF",
+      "file": "/images/uploads/guide-startup-mauritanie.pdf",
+      "description": "Un guide pratique de 50 pages couvrant tous les aspects de la création d'entreprise en Mauritanie : démarches administratives, financements, aspects juridiques."
+    },
+    {
+      "title": "Modèle de Business Plan",
+      "type": "DOCX",
+      "file": "/images/uploads/modele-business-plan.docx",
+      "description": "Template professionnel de business plan adapté au contexte mauritanien, avec exemples et conseils de rédaction."
+    },
+    {
+      "title": "Liste des investisseurs en Mauritanie",
+      "type": "XLSX",
+      "file": "/images/uploads/investisseurs-mauritanie.xlsx",
+      "description": "Base de données complète des investisseurs, fonds et institutions financières actifs en Mauritanie."
+    }
+  ]
+}
