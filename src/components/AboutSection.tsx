@@ -1,30 +1,27 @@
 import React from 'react';
 import { Target, Users, Lightbulb, Award } from 'lucide-react';
 import AnimatedCounter from './AnimatedCounter';
+import { useCMS } from './CMSProvider';
 
 const AboutSection = () => {
-  const missions = [
-    {
-      icon: <Target className="w-8 h-8" />,
-      title: "Fédération",
-      description: "Fédérer tout l'écosystème Tech en une communauté forte. Start-ups, FabLab, Investisseurs et incubateurs pour parler d'une seule et même voix aux autorités."
-    },
-    {
-      icon: <Users className="w-8 h-8" />,
-      title: "Networking & Lobbying",
-      description: "Se positionner comme interlocuteur de référence pour les autorités et les bailleurs. Accentuer le lobbying nécessaire pour la mise en place d'un cadre réglementaire en Mauritanie."
-    },
-    {
-      icon: <Lightbulb className="w-8 h-8" />,
-      title: "Formation",
-      description: "Apporter à tous les appels à projets et programmes de renforcement de capacités notre expérience pour améliorer la compétitivité des Start-up mauritaniennes."
-    },
-    {
-      icon: <Award className="w-8 h-8" />,
-      title: "Innovation",
-      description: "Promouvoir l'innovation technologique et accompagner les entrepreneurs dans leurs projets de transformation digitale pour un impact durable."
+  const { data, loading } = useCMS();
+
+  if (loading) {
+    return <div className="py-20 bg-gray-50"></div>;
+  }
+
+  const aboutContent = data.aboutContent || {};
+  const missions = aboutContent.missions || [];
+
+  const getIconComponent = (iconName: string) => {
+    switch (iconName) {
+      case 'Target': return <Target className="w-8 h-8" />;
+      case 'Users': return <Users className="w-8 h-8" />;
+      case 'Lightbulb': return <Lightbulb className="w-8 h-8" />;
+      case 'Award': return <Award className="w-8 h-8" />;
+      default: return <Target className="w-8 h-8" />;
     }
-  ];
+  };
 
   return (
     <section id="apropos" className="py-20 bg-gray-50">
@@ -34,7 +31,7 @@ const AboutSection = () => {
           <div className="order-2 lg:order-1">
             <div className="relative">
               <img
-                src="https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg?auto=compress&cs=tinysrgb&w=800"
+                src={aboutContent.image || "https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg?auto=compress&cs=tinysrgb&w=800"}
                 alt="Équipe entrepreneurs mauritaniens"
                 className="rounded-2xl shadow-xl transform hover:scale-105 transition-transform duration-500"
               />
@@ -48,17 +45,17 @@ const AboutSection = () => {
           
           <div className="order-1 lg:order-2">
             <h2 className="text-4xl font-bold text-gray-900 mb-6">
-              Qui sommes-nous<span className="text-green-500">?</span>
+              {aboutContent.title || "Qui sommes-nous"}<span className="text-green-500">?</span>
             </h2>
             
             <div className="w-20 h-1 bg-gradient-to-r from-green-500 to-blue-500 mb-6"></div>
             
             <p className="text-lg text-gray-700 mb-6 leading-relaxed">
-              L'Association Mauritanienne des Startups est née de l'idée de réunir sous une même bannière les entreprises technologiques innovantes de Mauritanie. L'objectif initial était de créer une synergie entre les startups pour renforcer leur visibilité et leur impact.
+              {aboutContent.description || "L'Association Mauritanienne des Startups est née de l'idée de réunir sous une même bannière les entreprises technologiques innovantes de Mauritanie."}
             </p>
             
             <p className="text-lg text-gray-700 mb-8 leading-relaxed">
-              Nous œuvrons pour développer un écosystème entrepreneurial dynamique, favoriser l'innovation et accompagner les jeunes entrepreneurs dans leur parcours vers la réussite.
+              {aboutContent.extendedDescription || "Nous œuvrons pour développer un écosystème entrepreneurial dynamique, favoriser l'innovation et accompagner les jeunes entrepreneurs dans leur parcours vers la réussite."}
             </p>
             
             <button className="group bg-gradient-to-r from-blue-900 to-blue-800 text-white px-8 py-4 rounded-lg font-semibold hover:from-blue-800 hover:to-blue-700 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1 flex items-center space-x-2">
@@ -81,7 +78,7 @@ const AboutSection = () => {
             <div key={index} className="group bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 border border-gray-100 hover:border-green-200">
               <div className="flex flex-col items-center text-center">
                 <div className="w-16 h-16 bg-gradient-to-br from-green-500 to-blue-600 rounded-xl flex items-center justify-center text-white mb-6 group-hover:scale-110 group-hover:rotate-6 transition-transform duration-300">
-                  {mission.icon}
+                  {getIconComponent(mission.icon)}
                 </div>
                 
                 <h3 className="text-xl font-bold text-gray-900 mb-4 group-hover:text-green-600 transition-colors">

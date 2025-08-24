@@ -1,8 +1,18 @@
 import React from 'react';
 import { ArrowRight, Users, Calendar, Trophy, Globe, Rocket } from 'lucide-react';
 import AnimatedCounter from './AnimatedCounter';
+import { useCMS } from './CMSProvider';
 
 const HeroSection = () => {
+  const { data, loading } = useCMS();
+
+  if (loading) {
+    return <div className="min-h-screen bg-gradient-to-br from-blue-900 via-blue-800 to-green-900"></div>;
+  }
+
+  const heroContent = data.heroContent || {};
+  const stats = heroContent.stats || [];
+
   return (
     <section id="accueil" className="relative min-h-screen bg-gradient-to-br from-blue-900 via-blue-800 to-green-900 overflow-hidden">
       {/* Animated Background Elements */}
@@ -47,88 +57,57 @@ const HeroSection = () => {
             </div>
             
             <h1 className="text-5xl md:text-7xl font-bold text-white mb-8 leading-tight">
-              Synergie Des
+              {heroContent.mainTitle || "Synergie Des"}
               <br />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-green-400 via-green-300 to-blue-300 animate-gradient">
-                Startups
+                {heroContent.highlightedWord || "Startups"}
               </span>
               <br />
-              <span className="text-green-400 text-4xl md:text-5xl">Mauritaniennes</span>
+              <span className="text-green-400 text-4xl md:text-5xl">{heroContent.subtitle || "Mauritaniennes"}</span>
             </h1>
             
             <p className="text-xl md:text-2xl text-blue-100 mb-10 max-w-2xl leading-relaxed">
-              <span className="text-green-300 font-bold">Unies</span> pour innover davantage ! 
-              Rejoignez l'écosystème startup le plus dynamique de Mauritanie et participez à la transformation numérique du pays.
+              {heroContent.description || "Unies pour innover davantage ! Rejoignez l'écosystème startup le plus dynamique de Mauritanie et participez à la transformation numérique du pays."}
             </p>
 
             <div className="flex flex-col sm:flex-row gap-6 mb-16">
               <button className="group bg-gradient-to-r from-green-500 to-green-600 text-white px-8 py-4 rounded-lg font-bold text-lg hover:from-green-600 hover:to-green-700 transition-all duration-300 shadow-2xl hover:shadow-green-500/25 transform hover:-translate-y-2 flex items-center justify-center space-x-3">
-                <span>Devenir Membre</span>
+                <span>{heroContent.primaryButtonText || "Devenir Membre"}</span>
                 <ArrowRight className="w-6 h-6 group-hover:translate-x-2 transition-transform" />
               </button>
               
               <button className="border-2 border-white/30 text-white px-8 py-4 rounded-lg font-bold text-lg hover:bg-white/10 transition-all duration-300 backdrop-blur-sm hover:border-green-400">
-                Découvrir l'Écosystème
+                {heroContent.secondaryButtonText || "Découvrir l'Écosystème"}
               </button>
             </div>
 
             {/* Enhanced Animated Stats */}
             <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 text-center lg:text-left">
-              <div className="group hover:scale-110 transition-transform duration-300">
-                <div className="flex items-center justify-center lg:justify-start mb-3">
-                  <div className="w-12 h-12 bg-gradient-to-br from-green-400 to-green-600 rounded-lg flex items-center justify-center mr-3 group-hover:rotate-12 transition-transform duration-300">
-                    <Users className="w-6 h-6 text-white" />
-                  </div>
-                  <AnimatedCounter 
-                    end={50} 
-                    suffix="+" 
-                    className="text-4xl font-bold text-white"
-                  />
-                </div>
-                <p className="text-blue-200 font-medium">Startups Membres</p>
-              </div>
-              
-              <div className="group hover:scale-110 transition-transform duration-300">
-                <div className="flex items-center justify-center lg:justify-start mb-3">
-                  <div className="w-12 h-12 bg-gradient-to-br from-blue-400 to-blue-600 rounded-lg flex items-center justify-center mr-3 group-hover:rotate-12 transition-transform duration-300">
-                    <Calendar className="w-6 h-6 text-white" />
-                  </div>
-                  <AnimatedCounter 
-                    end={25} 
-                    suffix="+" 
-                    className="text-4xl font-bold text-white"
-                  />
-                </div>
-                <p className="text-blue-200 font-medium">Événements/An</p>
-              </div>
-              
-              <div className="group hover:scale-110 transition-transform duration-300">
-                <div className="flex items-center justify-center lg:justify-start mb-3">
-                  <div className="w-12 h-12 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-lg flex items-center justify-center mr-3 group-hover:rotate-12 transition-transform duration-300">
-                    <Trophy className="w-6 h-6 text-white" />
-                  </div>
-                  <AnimatedCounter 
-                    end={100} 
-                    suffix="M+" 
-                    className="text-4xl font-bold text-white"
-                  />
-                </div>
-                <p className="text-blue-200 font-medium">Ouguiya Financements</p>
-              </div>
 
-              <div className="group hover:scale-110 transition-transform duration-300">
-                <div className="flex items-center justify-center lg:justify-start mb-3">
-                  <div className="w-12 h-12 bg-gradient-to-br from-purple-400 to-purple-600 rounded-lg flex items-center justify-center mr-3 group-hover:rotate-12 transition-transform duration-300">
-                    <Rocket className="w-6 h-6 text-white" />
+              {stats.map((stat: any, index: number) => {
+                const IconComponent = stat.icon === 'Users' ? Users : 
+                                   stat.icon === 'Calendar' ? Calendar :
+                                   stat.icon === 'Trophy' ? Trophy : Rocket;
+                const colorClass = index === 0 ? 'from-green-400 to-green-600' :
+                                 index === 1 ? 'from-blue-400 to-blue-600' :
+                                 index === 2 ? 'from-yellow-400 to-orange-500' : 'from-purple-400 to-purple-600';
+                
+                return (
+                  <div key={index} className="group hover:scale-110 transition-transform duration-300">
+                    <div className="flex items-center justify-center lg:justify-start mb-3">
+                      <div className={`w-12 h-12 bg-gradient-to-br ${colorClass} rounded-lg flex items-center justify-center mr-3 group-hover:rotate-12 transition-transform duration-300`}>
+                        <IconComponent className="w-6 h-6 text-white" />
+                      </div>
+                      <AnimatedCounter 
+                        end={stat.number} 
+                        suffix={stat.suffix} 
+                        className="text-4xl font-bold text-white"
+                      />
+                    </div>
+                    <p className="text-blue-200 font-medium">{stat.label}</p>
                   </div>
-                  <AnimatedCounter 
-                    end={200} 
-                    suffix="+" 
-                    className="text-4xl font-bold text-white"
-                  />
-                </div>
-                <p className="text-blue-200 font-medium">Emplois Créés</p>
-              </div>
+                );
+              })}
             </div>
           </div>
 
@@ -137,7 +116,7 @@ const HeroSection = () => {
             <div className="relative">
               <div className="relative overflow-hidden rounded-3xl shadow-2xl transform hover:scale-105 transition-transform duration-700 hover:rotate-1">
                 <img
-                  src="https://images.pexels.com/photos/3184360/pexels-photo-3184360.jpeg?auto=compress&cs=tinysrgb&w=800"
+                  src={heroContent.heroImage || "https://images.pexels.com/photos/3184360/pexels-photo-3184360.jpeg?auto=compress&cs=tinysrgb&w=800"}
                   alt="Entrepreneurs mauritaniens innovants"
                   className="w-full h-96 object-cover"
                 />

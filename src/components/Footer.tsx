@@ -1,7 +1,16 @@
 import React from 'react';
 import { Rocket, Phone, Mail, MapPin, ArrowRight, Heart } from 'lucide-react';
+import { useCMS } from './CMSProvider';
 
 const Footer = () => {
+  const { data, loading } = useCMS();
+
+  if (loading) {
+    return <div className="bg-gradient-to-br from-gray-900 via-blue-900 to-emerald-900 text-white py-16"></div>;
+  }
+
+  const siteConfig = data.siteConfig || {};
+
   const footerLinks = {
     'L\'Association': [
       { label: 'À propos', href: '#apropos' },
@@ -49,28 +58,28 @@ const Footer = () => {
                 <Rocket className="w-7 h-7 text-white" />
               </div>
               <div>
-                <h3 className="text-2xl font-bold">AMS</h3>
+                <h3 className="text-2xl font-bold">{siteConfig.abbreviation || "MSA"}</h3>
                 <p className="text-blue-200 text-sm">Association Mauritanienne</p>
               </div>
             </div>
             
             <p className="text-gray-300 mb-6 leading-relaxed">
-              L'Association Mauritanienne des Startups œuvre pour développer un écosystème entrepreneurial dynamique et favoriser l'innovation technologique en Mauritanie.
+              {siteConfig.description || "L'Association Mauritanienne des Startups œuvre pour développer un écosystème entrepreneurial dynamique et favoriser l'innovation technologique en Mauritanie."}
             </p>
 
             {/* Contact Info */}
             <div className="space-y-3 mb-6">
               <div className="flex items-center space-x-3">
                 <Phone className="w-5 h-5 text-emerald-400" />
-                <span className="text-gray-300">+222 44 09 26 55</span>
+                <span className="text-gray-300">{siteConfig.phone || "+222 44 09 26 55"}</span>
               </div>
               <div className="flex items-center space-x-3">
                 <Mail className="w-5 h-5 text-emerald-400" />
-                <span className="text-gray-300">depanapp222@gmail.com</span>
+                <span className="text-gray-300">{siteConfig.email || "depanapp222@gmail.com"}</span>
               </div>
               <div className="flex items-center space-x-3">
                 <MapPin className="w-5 h-5 text-emerald-400" />
-                <span className="text-gray-300">Nouakchott, Mauritanie</span>
+                <span className="text-gray-300">{siteConfig.address || "Nouakchott, Mauritanie"}</span>
               </div>
             </div>
 

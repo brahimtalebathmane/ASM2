@@ -1,68 +1,35 @@
 import React, { useState } from 'react';
 import { Check, Star, Users, Zap, Crown, ArrowRight } from 'lucide-react';
+import { useCMS } from './CMSProvider';
 
 const MembershipSection = () => {
+  const { data, loading } = useCMS();
   const [selectedPlan, setSelectedPlan] = useState('startup');
 
-  const plans = [
-    {
-      id: 'startup',
-      name: 'Startup',
-      price: '50,000',
-      period: '/an',
-      description: 'Parfait pour les jeunes entreprises qui démarrent',
-      icon: <Zap className="w-8 h-8" />,
-      color: 'from-blue-500 to-blue-600',
-      popular: false,
-      features: [
-        'Accès à tous les événements AMS',
-        'Listing dans l\'annuaire des startups',
-        'Newsletter et actualités exclusives',
-        'Accès aux ressources de base',
-        'Support communautaire',
-        'Participation aux webinaires'
-      ]
-    },
-    {
-      id: 'scale',
-      name: 'Scale-up',
-      price: '100,000',
-      period: '/an',
-      description: 'Pour les startups en croissance qui veulent accélérer',
-      icon: <Star className="w-8 h-8" />,
-      color: 'from-emerald-500 to-emerald-600',
-      popular: true,
-      features: [
-        'Tous les avantages Startup',
-        'Mentoring personnalisé',
-        'Accès prioritaire aux événements',
-        'Opportunités de pitch privilégiées',
-        'Mise en relation avec investisseurs',
-        'Formation avancée',
-        'Support marketing'
-      ]
-    },
-    {
-      id: 'enterprise',
-      name: 'Enterprise',
-      price: '200,000',
-      period: '/an',
-      description: 'Pour les entreprises établies qui veulent innover',
-      icon: <Crown className="w-8 h-8" />,
-      color: 'from-purple-500 to-purple-600',
-      popular: false,
-      features: [
-        'Tous les avantages Scale-up',
-        'Partenariat stratégique',
-        'Organisation d\'événements privés',
-        'Consultation stratégique',
-        'Accès aux données de marché',
-        'Programme d\'intrapreneuriat',
-        'Branding premium',
-        'Support dédié'
-      ]
+  if (loading) {
+    return <div className="py-20 bg-white"></div>;
+  }
+
+  const membershipData = data.membershipPlans || {};
+  const plans = membershipData.plans || [];
+
+  const getIconComponent = (planId: string) => {
+    switch (planId) {
+      case 'startup': return <Zap className="w-8 h-8" />;
+      case 'scale': return <Star className="w-8 h-8" />;
+      case 'enterprise': return <Crown className="w-8 h-8" />;
+      default: return <Zap className="w-8 h-8" />;
     }
-  ];
+  };
+
+  const getColorClass = (planId: string) => {
+    switch (planId) {
+      case 'startup': return 'from-blue-500 to-blue-600';
+      case 'scale': return 'from-emerald-500 to-emerald-600';
+      case 'enterprise': return 'from-purple-500 to-purple-600';
+      default: return 'from-blue-500 to-blue-600';
+    }
+  };
 
   const benefits = [
     {
@@ -88,7 +55,7 @@ const MembershipSection = () => {
         {/* Header */}
         <div className="text-center mb-16">
           <h2 className="text-4xl font-bold text-gray-900 mb-4">
-            Rejoignez <span className="text-emerald-500">l'AMS</span>
+            Rejoignez <span className="text-emerald-500">la MSA</span>
           </h2>
           <div className="w-20 h-1 bg-gradient-to-r from-emerald-500 to-blue-600 mx-auto mb-6"></div>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
@@ -130,8 +97,8 @@ const MembershipSection = () => {
               <div className="p-8">
                 {/* Header */}
                 <div className="text-center mb-8">
-                  <div className={`w-16 h-16 bg-gradient-to-br ${plan.color} rounded-2xl flex items-center justify-center text-white mx-auto mb-4`}>
-                    {plan.icon}
+                  <div className={`w-16 h-16 bg-gradient-to-br ${getColorClass(plan.id)} rounded-2xl flex items-center justify-center text-white mx-auto mb-4`}>
+                    {getIconComponent(plan.id)}
                   </div>
                   <h3 className="text-2xl font-bold text-gray-900 mb-2">{plan.name}</h3>
                   <p className="text-gray-600 mb-4">{plan.description}</p>

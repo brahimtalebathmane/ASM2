@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Menu, X, ChevronDown } from 'lucide-react';
+import { useCMS } from './CMSProvider';
 
 const Header = () => {
+  const { data, loading } = useCMS();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
   const [isScrolled, setIsScrolled] = useState(false);
@@ -13,6 +15,12 @@ const Header = () => {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  if (loading) {
+    return <div className="h-20 bg-white"></div>;
+  }
+
+  const siteConfig = data.siteConfig || {};
 
   const menuItems = [
     { label: 'Accueil', href: '#accueil' },
@@ -44,8 +52,8 @@ const Header = () => {
           <div className="flex items-center space-x-3">
             <div className="relative">
               <img
-                src="https://i.postimg.cc/sxmrrJLM/2025-06-23-13-51-11-ffbaa0a6.jpg"
-                alt="Association Mauritanienne des Startups"
+                src={siteConfig.logo || "https://i.postimg.cc/GppXFY5g/18.png"}
+                alt={siteConfig.title || "Association Mauritanienne des Startups"}
                 className="h-14 w-auto object-contain"
               />
               <div className="absolute -inset-1 bg-gradient-to-br from-green-500/20 to-blue-600/20 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
@@ -53,7 +61,7 @@ const Header = () => {
             <div>
               <h1 className={`text-xl font-bold transition-colors ${
                 isScrolled ? 'text-gray-900' : 'text-white'
-              }`}>AMS</h1>
+              }`}>{siteConfig.abbreviation || "MSA"}</h1>
               <p className={`text-xs transition-colors ${
                 isScrolled ? 'text-gray-600' : 'text-blue-100'
               }`}>Association Mauritanienne</p>

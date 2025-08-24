@@ -1,0 +1,28 @@
+{
+  "title": "Qui sommes-nous?",
+  "description": "L'Association Mauritanienne des Startups est née de l'idée de réunir sous une même bannière les entreprises technologiques innovantes de Mauritanie. L'objectif initial était de créer une synergie entre les startups pour renforcer leur visibilité et leur impact.",
+  "extendedDescription": "Nous œuvrons pour développer un écosystème entrepreneurial dynamique, favoriser l'innovation et accompagner les jeunes entrepreneurs dans leur parcours vers la réussite.",
+  "image": "https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg?auto=compress&cs=tinysrgb&w=800",
+  "missions": [
+    {
+      "title": "Fédération",
+      "description": "Fédérer tout l'écosystème Tech en une communauté forte. Start-ups, FabLab, Investisseurs et incubateurs pour parler d'une seule et même voix aux autorités.",
+      "icon": "Target"
+    },
+    {
+      "title": "Networking & Lobbying",
+      "description": "Se positionner comme interlocuteur de référence pour les autorités et les bailleurs. Accentuer le lobbying nécessaire pour la mise en place d'un cadre réglementaire en Mauritanie.",
+      "icon": "Users"
+    },
+    {
+      "title": "Formation",
+      "description": "Apporter à tous les appels à projets et programmes de renforcement de capacités notre expérience pour améliorer la compétitivité des Start-up mauritaniennes.",
+      "icon": "Lightbulb"
+    },
+    {
+      "title": "Innovation",
+      "description": "Promouvoir l'innovation technologique et accompagner les entrepreneurs dans leurs projets de transformation digitale pour un impact durable.",
+      "icon": "Award"
+    }
+  ]
+}
