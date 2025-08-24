@@ -75,7 +75,7 @@ const EventsSection = () => {
                 Aucun événement {activeTab === 'upcoming' ? 'à venir' : 'passé'} pour le moment
               </h3>
               <p className="text-gray-600">
-                Les événements apparaîtront ici une fois ajoutés via le CMS.
+                .
               </p>
             </div>
           </div>
