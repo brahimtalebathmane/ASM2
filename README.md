@@ -1,5 +1,14 @@
 # MSA - Association Mauritanienne des Startups
 
+## Dynamic Content Management
+
+All content is now dynamically loaded from the `public/data/` folder:
+- Site configuration: `/public/data/siteConfig.json`
+- Hero content: `/public/data/heroContent.json`
+- About content: `/public/data/aboutContent.json`
+- Membership plans: `/public/data/membership.json`
+- Collections (startups, events, news, partners, resources): `/public/data/[collection]/`
+
 This website includes a Netlify CMS admin dashboard for easy content management.
 ## Content Management System (CMS)
 ### Admin Access
@@ -7,12 +16,16 @@ This website includes a Netlify CMS admin dashboard for easy content management.
 - Requires Netlify Identity authentication
 - Admins can edit all content, images, and site configuration
 ### Features
-- Edit site configuration (logo, title, contact info)
-- Manage hero section content
-- Update about section and missions
-- Add/edit startups, events, news articles
-- Manage partners and resources
-- Configure membership plans
+- **Full CRUD Operations**: Create, Read, Update, Delete for all collections
+- **Dynamic Content**: All changes appear immediately on the live site
+- **Image Management**: Upload and manage images through the CMS
+- **Real-time Updates**: No manual rebuilds required
+- **Collections Management**:
+  - ✅ Startups: Add/edit/delete startup profiles
+  - ✅ Events: Manage upcoming and past events
+  - ✅ News & Articles: Create/edit/delete blog posts
+  - ✅ Partners: Add/remove partner organizations
+  - ✅ Resources: Manage downloadable resources
 ### Setup Instructions
 1. Enable Netlify Identity in your Netlify dashboard
 2. Enable Git Gateway in Identity settings

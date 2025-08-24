@@ -9,7 +9,7 @@ collections:
   - name: "config"
     label: "Site Configuration"
     files:
-      - file: "src/data/siteConfig.json"
+      - file: "public/data/siteConfig.json"
         label: "Site Settings"
         name: "site"
         fields:
@@ -24,7 +24,7 @@ collections:
   - name: "hero"
     label: "Hero Section"
     files:
-      - file: "src/data/heroContent.json"
+      - file: "public/data/heroContent.json"
         label: "Hero Content"
         name: "hero"
         fields:
@@ -47,7 +47,7 @@ collections:
   - name: "about"
     label: "About Section"
     files:
-      - file: "src/data/aboutContent.json"
+      - file: "public/data/aboutContent.json"
         label: "About Content"
         name: "about"
         fields:
@@ -65,8 +65,9 @@ collections:
 
   - name: "startups"
     label: "Startups"
-    folder: "src/data/startups"
+    folder: "public/data/startups"
     create: true
+    delete: true
     slug: "{{slug}}"
     fields:
       - {label: "Name", name: "name", widget: "string"}
@@ -80,8 +81,9 @@ collections:
 
   - name: "events"
     label: "Events"
-    folder: "src/data/events"
+    folder: "public/data/events"
     create: true
+    delete: true
     slug: "{{slug}}"
     fields:
       - {label: "Title", name: "title", widget: "string"}
@@ -96,8 +98,9 @@ collections:
 
   - name: "news"
     label: "News & Articles"
-    folder: "src/data/news"
+    folder: "public/data/news"
     create: true
+    delete: true
     slug: "{{slug}}"
     fields:
       - {label: "Title", name: "title", widget: "string"}
@@ -112,8 +115,9 @@ collections:
 
   - name: "partners"
     label: "Partners"
-    folder: "src/data/partners"
+    folder: "public/data/partners"
     create: true
+    delete: true
     slug: "{{slug}}"
     fields:
       - {label: "Name", name: "name", widget: "string"}
@@ -123,8 +127,9 @@ collections:
 
   - name: "resources"
     label: "Resources"
-    folder: "src/data/resources"
+    folder: "public/data/resources"
     create: true
+    delete: true
     slug: "{{slug}}"
     fields:
       - {label: "Title", name: "title", widget: "string"}
@@ -138,7 +143,7 @@ collections:
   - name: "pages"
     label: "Pages"
     files:
-      - file: "src/data/membership.json"
+      - file: "public/data/membership.json"
         label: "Membership Plans"
         name: "membership"
         fields:

@@ -1,51 +1,9 @@
 import React from 'react';
 import { Handshake, Building, Award, Users } from 'lucide-react';
+import { useDynamicContent } from '../hooks/useDynamicContent';
 
 const PartnersSection = () => {
-  const partners = [
-    {
-      id: 1,
-      name: "Banque Atlantique",
-      logo: "https://images.pexels.com/photos/3184360/pexels-photo-3184360.jpeg?auto=compress&cs=tinysrgb&w=200",
-      category: "Financier",
-      description: "Partenaire financier principal pour le financement des startups"
-    },
-    {
-      id: 2,
-      name: "Université de Nouakchott",
-      logo: "https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg?auto=compress&cs=tinysrgb&w=200",
-      category: "Académique",
-      description: "Collaboration pour la recherche et l'innovation"
-    },
-    {
-      id: 3,
-      name: "Ministère de l'Économie Numérique",
-      logo: "https://images.pexels.com/photos/3184317/pexels-photo-3184317.jpeg?auto=compress&cs=tinysrgb&w=200",
-      category: "Institutionnel",
-      description: "Soutien institutionnel et réglementaire"
-    },
-    {
-      id: 4,
-      name: "TechHub Incubator",
-      logo: "https://images.pexels.com/photos/3184360/pexels-photo-3184360.jpeg?auto=compress&cs=tinysrgb&w=200",
-      category: "Incubateur",
-      description: "Incubation et accompagnement des startups"
-    },
-    {
-      id: 5,
-      name: "Orange Mauritanie",
-      logo: "https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg?auto=compress&cs=tinysrgb&w=200",
-      category: "Télécoms",
-      description: "Partenaire technologique et innovation"
-    },
-    {
-      id: 6,
-      name: "Mauritel",
-      logo: "https://images.pexels.com/photos/3184317/pexels-photo-3184317.jpeg?auto=compress&cs=tinysrgb&w=200",
-      category: "Télécoms",
-      description: "Solutions de connectivité et infrastructure"
-    }
-  ];
+  const { data: partners, loading } = useDynamicContent('partners');
 
   const partnershipBenefits = [
     {
@@ -69,6 +27,19 @@ const PartnersSection = () => {
       description: "Élargissez votre réseau professionnel et créez de nouvelles opportunités"
     }
   ];
+
+  if (loading) {
+    return (
+      <section id="partenaires" className="py-20 bg-gray-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center">
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-emerald-500 mx-auto"></div>
+            <p className="mt-4 text-gray-600">Chargement des partenaires...</p>
+          </div>
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section id="partenaires" className="py-20 bg-gray-50">

@@ -1,69 +1,28 @@
 import React, { useState } from 'react';
 import { Calendar, Clock, MapPin, Users, ArrowRight } from 'lucide-react';
+import { useDynamicContent } from '../hooks/useDynamicContent';
 
 const EventsSection = () => {
+  const { data: allEvents, loading } = useDynamicContent('events');
   const [activeTab, setActiveTab] = useState('upcoming');
 
-  const upcomingEvents = [
-    {
-      id: 1,
-      title: "Mauritania Tech Summit 2025",
-      date: "15 Mars 2025",
-      time: "09:00 - 18:00",
-      location: "Centre de Conférences, Nouakchott",
-      attendees: "200+",
-      type: "Conférence",
-      description: "Le plus grand événement tech de Mauritanie réunissant entrepreneurs, investisseurs et experts",
-      image: "https://images.pexels.com/photos/3184360/pexels-photo-3184360.jpeg?auto=compress&cs=tinysrgb&w=600"
-    },
-    {
-      id: 2,
-      title: "Workshop: Financement des Startups",
-      date: "28 Février 2025",
-      time: "14:00 - 17:00",
-      location: "Incubateur TechHub, Nouakchott",
-      attendees: "50+",
-      type: "Atelier",
-      description: "Découvrez les stratégies de levée de fonds et rencontrez des investisseurs potentiels",
-      image: "https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg?auto=compress&cs=tinysrgb&w=600"
-    },
-    {
-      id: 3,
-      title: "Hackathon Innovation Sociale",
-      date: "10-12 Avril 2025",
-      time: "48h non-stop",
-      location: "Université de Nouakchott",
-      attendees: "100+",
-      type: "Hackathon",
-      description: "Créez des solutions innovantes pour les défis sociaux de la Mauritanie",
-      image: "https://images.pexels.com/photos/3184317/pexels-photo-3184317.jpeg?auto=compress&cs=tinysrgb&w=600"
-    }
-  ];
-
-  const pastEvents = [
-    {
-      id: 4,
-      title: "Demo Day - Promotion 2024",
-      date: "20 Décembre 2024",
-      location: "Hôtel Azalai, Nouakchott",
-      attendees: "150+",
-      type: "Pitch",
-      description: "Présentation des startups incubées avec la participation d'investisseurs nationaux et internationaux",
-      image: "https://images.pexels.com/photos/3184360/pexels-photo-3184360.jpeg?auto=compress&cs=tinysrgb&w=600"
-    },
-    {
-      id: 5,
-      title: "Formation: Marketing Digital",
-      date: "15 Novembre 2024",
-      location: "Centre de Formation AMS",
-      attendees: "80+",
-      type: "Formation",
-      description: "Masterclass sur les stratégies de marketing digital adaptées au marché mauritanien",
-      image: "https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg?auto=compress&cs=tinysrgb&w=600"
-    }
-  ];
+  const upcomingEvents = allEvents.filter(event => event.status === 'upcoming');
+  const pastEvents = allEvents.filter(event => event.status === 'past');
 
   const currentEvents = activeTab === 'upcoming' ? upcomingEvents : pastEvents;
+
+  if (loading) {
+    return (
+      <section id="evenements" className="py-20 bg-gray-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center">
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-emerald-500 mx-auto"></div>
+            <p className="mt-4 text-gray-600">Chargement des événements...</p>
+          </div>
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section id="evenements" className="py-20 bg-gray-50">

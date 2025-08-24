@@ -1,73 +1,12 @@
 import React, { useState } from 'react';
 import { Download, FileText, Video, BookOpen, ExternalLink } from 'lucide-react';
+import { useDynamicContent } from '../hooks/useDynamicContent';
 
 const ResourcesSection = () => {
+  const { data: resources, loading } = useDynamicContent('resources');
   const [activeCategory, setActiveCategory] = useState('Tous');
 
   const categories = ['Tous', 'Guides', 'Financements', 'Juridique', 'Marketing', 'Technique'];
-
-  const resources = [
-    {
-      id: 1,
-      title: "Guide complet : Créer sa startup en Mauritanie",
-      category: "Guides",
-      type: "PDF",
-      size: "2.5 MB",
-      downloads: 1250,
-      description: "Toutes les étapes pour lancer votre startup, de l'idée à la mise sur le marché",
-      icon: <FileText className="w-6 h-6" />
-    },
-    {
-      id: 2,
-      title: "Opportunités de financement 2025",
-      category: "Financements",
-      type: "PDF",
-      size: "1.8 MB",
-      downloads: 950,
-      description: "Liste complète des programmes de financement disponibles pour les startups",
-      icon: <FileText className="w-6 h-6" />
-    },
-    {
-      id: 3,
-      title: "Modèle de Business Plan",
-      category: "Guides",
-      type: "DOCX",
-      size: "850 KB",
-      downloads: 2100,
-      description: "Template professionnel pour rédiger votre business plan",
-      icon: <FileText className="w-6 h-6" />
-    },
-    {
-      id: 4,
-      title: "Réglementation startup - Mauritanie",
-      category: "Juridique",
-      type: "PDF",
-      size: "3.2 MB",
-      downloads: 780,
-      description: "Cadre juridique et réglementaire pour les entreprises innovantes",
-      icon: <FileText className="w-6 h-6" />
-    },
-    {
-      id: 5,
-      title: "Stratégies Marketing Digital",
-      category: "Marketing",
-      type: "PDF",
-      size: "4.1 MB",
-      downloads: 1650,
-      description: "Guide pratique pour développer votre présence digitale",
-      icon: <FileText className="w-6 h-6" />
-    },
-    {
-      id: 6,
-      title: "Checklist Lancement Produit",
-      category: "Technique",
-      type: "PDF",
-      size: "1.2 MB",
-      downloads: 890,
-      description: "Liste de vérification pour un lancement de produit réussi",
-      icon: <FileText className="w-6 h-6" />
-    }
-  ];
 
   const filteredResources = resources.filter(resource => 
     activeCategory === 'Tous' || resource.category === activeCategory
@@ -99,6 +38,19 @@ const ResourcesSection = () => {
       views: 670
     }
   ];
+
+  if (loading) {
+    return (
+      <section id="ressources" className="py-20 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center">
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-emerald-500 mx-auto"></div>
+            <p className="mt-4 text-gray-600">Chargement des ressources...</p>
+          </div>
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section id="ressources" className="py-20 bg-white">
@@ -141,7 +93,7 @@ const ResourcesSection = () => {
                   <div className="flex items-start space-x-4">
                     {/* Icon */}
                     <div className="w-12 h-12 bg-gradient-to-br from-emerald-500 to-teal-600 rounded-lg flex items-center justify-center text-white group-hover:scale-110 transition-transform duration-300">
-                      {resource.icon}
+                      <FileText className="w-6 h-6" />
                     </div>
 
                     {/* Content */}

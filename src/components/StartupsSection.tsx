@@ -1,80 +1,13 @@
 import React, { useState } from 'react';
 import { Search, Filter, MapPin, Users, ExternalLink } from 'lucide-react';
+import { useDynamicContent } from '../hooks/useDynamicContent';
 
 const StartupsSection = () => {
+  const { data: startups, loading } = useDynamicContent('startups');
   const [selectedSector, setSelectedSector] = useState('Tous');
   const [searchTerm, setSearchTerm] = useState('');
 
   const sectors = ['Tous', 'FinTech', 'EdTech', 'HealthTech', 'AgriTech', 'E-commerce', 'SaaS'];
-
-  const startups = [
-    {
-      id: 1,
-      name: "MauriPay",
-      sector: "FinTech",
-      description: "Solution de paiement mobile révolutionnaire pour l'inclusion financière",
-      founder: "Aminata Sow",
-      employees: "12-15",
-      location: "Nouakchott",
-      website: "https://mauripay.mr",
-      logo: "https://images.pexels.com/photos/3184360/pexels-photo-3184360.jpeg?auto=compress&cs=tinysrgb&w=200"
-    },
-    {
-      id: 2,
-      name: "EduMauri",
-      sector: "EdTech",
-      description: "Plateforme d'apprentissage en ligne adaptée au contexte mauritanien",
-      founder: "Mohamed Lemine",
-      employees: "8-10",
-      location: "Nouakchott",
-      website: "https://edumauri.mr",
-      logo: "https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg?auto=compress&cs=tinysrgb&w=200"
-    },
-    {
-      id: 3,
-      name: "HealthConnect",
-      sector: "HealthTech",
-      description: "Télémédecine et gestion numérique des dossiers médicaux",
-      founder: "Dr. Fatima Mint",
-      employees: "15-20",
-      location: "Nouakchott",
-      website: "https://healthconnect.mr",
-      logo: "https://images.pexels.com/photos/3184317/pexels-photo-3184317.jpeg?auto=compress&cs=tinysrgb&w=200"
-    },
-    {
-      id: 4,
-      name: "AgriSmart",
-      sector: "AgriTech",
-      description: "Solutions IoT pour l'agriculture intelligente et durable",
-      founder: "Ousmane Ba",
-      employees: "10-12",
-      location: "Rosso",
-      website: "https://agrismart.mr",
-      logo: "https://images.pexels.com/photos/3184360/pexels-photo-3184360.jpeg?auto=compress&cs=tinysrgb&w=200"
-    },
-    {
-      id: 5,
-      name: "MauriShop",
-      sector: "E-commerce",
-      description: "Marketplace locale connectant vendeurs et acheteurs mauritaniens",
-      founder: "Aissata Diallo",
-      employees: "20-25",
-      location: "Nouakchott",
-      website: "https://maurishop.mr",
-      logo: "https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg?auto=compress&cs=tinysrgb&w=200"
-    },
-    {
-      id: 6,
-      name: "DataFlow",
-      sector: "SaaS",
-      description: "Solutions de gestion d'entreprise adaptées aux PME mauritaniennes",
-      founder: "Cheikh Abdallahi",
-      employees: "6-8",
-      location: "Nouakchott",
-      website: "https://dataflow.mr",
-      logo: "https://images.pexels.com/photos/3184317/pexels-photo-3184317.jpeg?auto=compress&cs=tinysrgb&w=200"
-    }
-  ];
 
   const filteredStartups = startups.filter(startup => {
     const matchesSector = selectedSector === 'Tous' || startup.sector === selectedSector;
@@ -82,6 +15,19 @@ const StartupsSection = () => {
                          startup.description.toLowerCase().includes(searchTerm.toLowerCase());
     return matchesSector && matchesSearch;
   });
+
+  if (loading) {
+    return (
+      <section id="startups" className="py-20 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center">
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-emerald-500 mx-auto"></div>
+            <p className="mt-4 text-gray-600">Chargement des startups...</p>
+          </div>
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section id="startups" className="py-20 bg-white">

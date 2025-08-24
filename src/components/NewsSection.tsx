@@ -1,79 +1,12 @@
 import React, { useState } from 'react';
 import { Calendar, User, ArrowRight, TrendingUp, Star } from 'lucide-react';
+import { useDynamicContent } from '../hooks/useDynamicContent';
 
 const NewsSection = () => {
+  const { data: news, loading } = useDynamicContent('news');
   const [selectedCategory, setSelectedCategory] = useState('Tous');
 
   const categories = ['Tous', 'Innovations', 'Financements', 'Événements', 'Portraits'];
-
-  const news = [
-    {
-      id: 1,
-      title: "MauriPay lève 2 millions d'ouguiyas pour sa expansion",
-      category: "Financements",
-      excerpt: "La startup fintech mauritanienne annonce une levée de fonds record pour étendre ses services de paiement mobile dans toute la région.",
-      author: "Fatima Mint Ahmed",
-      date: "15 Janvier 2025",
-      readTime: "5 min",
-      image: "https://images.pexels.com/photos/3184360/pexels-photo-3184360.jpeg?auto=compress&cs=tinysrgb&w=600",
-      featured: true
-    },
-    {
-      id: 2,
-      title: "L'IA au service de l'agriculture mauritanienne",
-      category: "Innovations",
-      excerpt: "AgriSmart révolutionne le secteur agricole avec ses solutions d'intelligence artificielle adaptées au climat sahélien.",
-      author: "Mohamed Lemine",
-      date: "12 Janvier 2025",
-      readTime: "4 min",
-      image: "https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg?auto=compress&cs=tinysrgb&w=600",
-      featured: false
-    },
-    {
-      id: 3,
-      title: "Portrait : Aminata Sow, pionnière de la EdTech",
-      category: "Portraits",
-      excerpt: "Rencontre avec la fondatrice d'EduMauri qui transforme l'éducation en Mauritanie grâce au numérique.",
-      author: "Ousmane Ba",
-      date: "10 Janvier 2025",
-      readTime: "6 min",
-      image: "https://images.pexels.com/photos/3184317/pexels-photo-3184317.jpeg?auto=compress&cs=tinysrgb&w=600",
-      featured: false
-    },
-    {
-      id: 4,
-      title: "Hackathon National 2025 : 48h pour innover",
-      category: "Événements",
-      excerpt: "Plus de 200 développeurs attendus pour le plus grand hackathon de Mauritanie axé sur les solutions durables.",
-      author: "Aissata Diallo",
-      date: "8 Janvier 2025",
-      readTime: "3 min",
-      image: "https://images.pexels.com/photos/3184360/pexels-photo-3184360.jpeg?auto=compress&cs=tinysrgb&w=600",
-      featured: false
-    },
-    {
-      id: 5,
-      title: "Partenariat stratégique avec l'Université de Nouakchott",
-      category: "Innovations",
-      excerpt: "L'AMS signe un accord de collaboration pour former la prochaine génération d'entrepreneurs mauritaniens.",
-      author: "Cheikh Abdallahi",
-      date: "5 Janvier 2025",
-      readTime: "4 min",
-      image: "https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg?auto=compress&cs=tinysrgb&w=600",
-      featured: false
-    },
-    {
-      id: 6,
-      title: "La digitalisation des PME mauritaniennes en marche",
-      category: "Innovations",
-      excerpt: "Étude exclusive sur l'adoption des technologies numériques par les petites et moyennes entreprises du pays.",
-      author: "Dr. Mariem Vall",
-      date: "3 Janvier 2025",
-      readTime: "7 min",
-      image: "https://images.pexels.com/photos/3184317/pexels-photo-3184317.jpeg?auto=compress&cs=tinysrgb&w=600",
-      featured: false
-    }
-  ];
 
   const filteredNews = news.filter(article => 
     selectedCategory === 'Tous' || article.category === selectedCategory
@@ -81,6 +14,19 @@ const NewsSection = () => {
 
   const featuredArticle = news.find(article => article.featured);
   const regularArticles = filteredNews.filter(article => !article.featured);
+
+  if (loading) {
+    return (
+      <section id="actualites" className="py-20 bg-gray-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center">
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-emerald-500 mx-auto"></div>
+            <p className="mt-4 text-gray-600">Chargement des actualités...</p>
+          </div>
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section id="actualites" className="py-20 bg-gray-50">
