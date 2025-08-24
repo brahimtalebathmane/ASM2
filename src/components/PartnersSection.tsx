@@ -71,7 +71,13 @@ const PartnersSection = () => {
         ) : (
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8 mb-16">
             {partners.map((partner) => (
-              <div key={partner.id} className="group bg-white rounded-2xl p-6 shadow-md hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 text-center">
+              <a
+                key={partner.id}
+                href={partner.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group bg-white rounded-2xl p-6 shadow-md hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 text-center block"
+              >
                 <img
                   src={partner.logo}
                   alt={partner.name}
@@ -80,10 +86,7 @@ const PartnersSection = () => {
                 <h3 className="font-bold text-gray-900 mb-2 text-sm group-hover:text-emerald-600 transition-colors">
                   {partner.name}
                 </h3>
-                <span className="text-xs text-emerald-600 bg-emerald-50 px-2 py-1 rounded-full">
-                  {partner.category}
-                </span>
-              </div>
+              </a>
             ))}
           </div>
         )}

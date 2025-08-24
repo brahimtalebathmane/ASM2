@@ -93,14 +93,9 @@ const NewsSection = () => {
                   <div className="flex items-center justify-between mb-6">
                     <div className="flex items-center space-x-4 text-sm text-gray-500">
                       <div className="flex items-center space-x-2">
-                        <User className="w-4 h-4" />
-                        <span>{featuredArticle.author}</span>
-                      </div>
-                      <div className="flex items-center space-x-2">
                         <Calendar className="w-4 h-4" />
-                        <span>{featuredArticle.date}</span>
+                        <span>{new Date(featuredArticle.date).toLocaleDateString('fr-FR')}</span>
                       </div>
-                      <span>Lecture {featuredArticle.readTime}</span>
                     </div>
                   </div>
 
@@ -156,16 +151,11 @@ const NewsSection = () => {
 
                   {/* Meta */}
                   <div className="flex items-center justify-between text-sm text-gray-500 mb-4">
-                    <div className="flex items-center space-x-2">
-                      <User className="w-4 h-4" />
-                      <span>{article.author}</span>
-                    </div>
                     <div className="flex items-center space-x-4">
                       <div className="flex items-center space-x-1">
                         <Calendar className="w-4 h-4" />
-                        <span>{article.date}</span>
+                        <span>{new Date(article.date).toLocaleDateString('fr-FR')}</span>
                       </div>
-                      <span>Lecture {article.readTime}</span>
                     </div>
                   </div>
 
