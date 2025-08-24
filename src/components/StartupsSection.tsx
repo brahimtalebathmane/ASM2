@@ -111,18 +111,40 @@ const StartupsSection = () => {
                   <Users className="w-4 h-4" />
                   <span>Employés: {startup.employees}</span>
                 </div>
-                  {startup.sector && (
-                    <span className="text-sm text-emerald-600 bg-emerald-50 px-2 py-1 rounded-full">
-                      {startup.sector}
-                    </span>
-                  )}
-                </div>
+                {startup.sector && (
+                  <span className="text-sm text-emerald-600 bg-emerald-50 px-2 py-1 rounded-full">
+                    {startup.sector}
+                  </span>
+                )}
               </div>
 
+              {/* URL */}
+              {startup.url && (
+                <div className="mb-6">
+                  <div className="flex items-center space-x-2 text-sm text-gray-600">
+                    <ExternalLink className="w-4 h-4" />
+                    <a href={startup.url} target="_blank" rel="noopener noreferrer" className="text-emerald-600 hover:text-emerald-700">
+                      Visiter le site
+                    </a>
+                  </div>
+                </div>
+              )}
+
               {/* CTA */}
-              <button className="w-full bg-gradient-to-r from-emerald-500 to-teal-600 text-white py-3 rounded-lg font-semibold hover:from-emerald-600 hover:to-teal-700 transition-all duration-300 group-hover:shadow-lg">
-                Voir le profil
-              </button>
+              {startup.url ? (
+                <a
+                  href={startup.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block w-full bg-gradient-to-r from-emerald-500 to-teal-600 text-white py-3 rounded-lg font-semibold hover:from-emerald-600 hover:to-teal-700 transition-all duration-300 group-hover:shadow-lg text-center"
+                >
+                  Visiter le site
+                </a>
+              ) : (
+                <button className="w-full bg-gradient-to-r from-emerald-500 to-teal-600 text-white py-3 rounded-lg font-semibold hover:from-emerald-600 hover:to-teal-700 transition-all duration-300 group-hover:shadow-lg">
+                  En savoir plus
+                </button>
+              )}
             </div>
           ))}
         </div>
@@ -148,31 +170,16 @@ const StartupsSection = () => {
                 </button>
               </div>
             </div>
-              {startup.url && (
-                <a href={startup.url} target="_blank" rel="noopener noreferrer">
-                  <ExternalLink className="w-5 h-5 text-gray-400 group-hover:text-emerald-600 transition-colors" />
-                </a>
-              )}
+          </div>
         ) : (
           <div className="mt-16 text-center bg-gradient-to-r from-blue-900 to-blue-800 rounded-3xl p-12 text-white">
             <h3 className="text-3xl font-bold mb-4">Votre startup n'est pas listée ?</h3>
             <p className="text-xl text-blue-200 mb-8">
               Rejoignez notre communauté d'entrepreneurs innovants
             </p>
-            {startup.url ? (
-              <a
-                href={startup.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="block w-full bg-gradient-to-r from-emerald-500 to-teal-600 text-white py-3 rounded-lg font-semibold hover:from-emerald-600 hover:to-teal-700 transition-all duration-300 group-hover:shadow-lg text-center"
-              >
-                Visiter le site
-              </a>
-            ) : (
-              <button className="w-full bg-gradient-to-r from-emerald-500 to-teal-600 text-white py-3 rounded-lg font-semibold hover:from-emerald-600 hover:to-teal-700 transition-all duration-300 group-hover:shadow-lg">
-                En savoir plus
-              </button>
-            )}
+            <button className="bg-gradient-to-r from-emerald-500 to-teal-600 text-white px-8 py-4 rounded-lg font-semibold hover:from-emerald-600 hover:to-teal-700 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1">
+              Devenir Membre
+            </button>
           </div>
         )}
       </div>
@@ -180,14 +187,4 @@ const StartupsSection = () => {
   );
 };
 
-            {/* URL */}
-            {startup.url && (
-              <div className="mb-6">
-                <div className="flex items-center space-x-2 text-sm text-gray-600">
-                  <ExternalLink className="w-4 h-4" />
-                  <a href={startup.url} target="_blank" rel="noopener noreferrer" className="text-emerald-600 hover:text-emerald-700">
-                    Visiter le site
-                  </a>
-                </div>
-              </div>
-            )}
+export default StartupsSection;
