@@ -87,45 +87,59 @@ const ResourcesSection = () => {
             </div>
 
             {/* Resources Grid */}
-            <div className="space-y-6">
-              {filteredResources.map((resource) => (
-                <div key={resource.id} className="group bg-gray-50 hover:bg-white border border-gray-200 rounded-2xl p-6 hover:shadow-lg transition-all duration-300">
-                  <div className="flex items-start space-x-4">
-                    {/* Icon */}
-                    <div className="w-12 h-12 bg-gradient-to-br from-emerald-500 to-teal-600 rounded-lg flex items-center justify-center text-white group-hover:scale-110 transition-transform duration-300">
-                      <FileText className="w-6 h-6" />
-                    </div>
-
-                    {/* Content */}
-                    <div className="flex-1">
-                      <h3 className="text-xl font-bold text-gray-900 mb-2 group-hover:text-emerald-600 transition-colors">
-                        {resource.title}
-                      </h3>
-                      
-                      <p className="text-gray-600 mb-4">
-                        {resource.description}
-                      </p>
-
-                      {/* Meta */}
-                      <div className="flex items-center space-x-4 text-sm text-gray-500 mb-4">
-                        <span className="bg-emerald-100 text-emerald-800 px-2 py-1 rounded-full">
-                          {resource.category}
-                        </span>
-                        <span>{resource.type}</span>
-                        <span>{resource.size}</span>
-                        <span>{resource.downloads} téléchargements</span>
+            {filteredResources.length === 0 ? (
+              <div className="text-center py-16">
+                <div className="max-w-md mx-auto">
+                  <div className="w-24 h-24 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                    <BookOpen className="w-12 h-12 text-gray-400" />
+                  </div>
+                  <h3 className="text-2xl font-bold text-gray-900 mb-4">Aucune ressource pour le moment</h3>
+                  <p className="text-gray-600">
+                    Les ressources et guides apparaîtront ici une fois ajoutés via le CMS.
+                  </p>
+                </div>
+              </div>
+            ) : (
+              <div className="space-y-6">
+                {filteredResources.map((resource) => (
+                  <div key={resource.id} className="group bg-gray-50 hover:bg-white border border-gray-200 rounded-2xl p-6 hover:shadow-lg transition-all duration-300">
+                    <div className="flex items-start space-x-4">
+                      {/* Icon */}
+                      <div className="w-12 h-12 bg-gradient-to-br from-emerald-500 to-teal-600 rounded-lg flex items-center justify-center text-white group-hover:scale-110 transition-transform duration-300">
+                        <FileText className="w-6 h-6" />
                       </div>
 
-                      {/* Download Button */}
-                      <button className="group/btn flex items-center space-x-2 bg-gradient-to-r from-emerald-500 to-teal-600 text-white px-6 py-3 rounded-lg font-semibold hover:from-emerald-600 hover:to-teal-700 transition-all duration-300 shadow-lg hover:shadow-xl">
-                        <Download className="w-4 h-4 group-hover/btn:translate-y-0.5 transition-transform" />
-                        <span>Télécharger</span>
-                      </button>
+                      {/* Content */}
+                      <div className="flex-1">
+                        <h3 className="text-xl font-bold text-gray-900 mb-2 group-hover:text-emerald-600 transition-colors">
+                          {resource.title}
+                        </h3>
+                        
+                        <p className="text-gray-600 mb-4">
+                          {resource.description}
+                        </p>
+
+                        {/* Meta */}
+                        <div className="flex items-center space-x-4 text-sm text-gray-500 mb-4">
+                          <span className="bg-emerald-100 text-emerald-800 px-2 py-1 rounded-full">
+                            {resource.category}
+                          </span>
+                          <span>{resource.type}</span>
+                          <span>{resource.size}</span>
+                          <span>{resource.downloads} téléchargements</span>
+                        </div>
+
+                        {/* Download Button */}
+                        <button className="group/btn flex items-center space-x-2 bg-gradient-to-r from-emerald-500 to-teal-600 text-white px-6 py-3 rounded-lg font-semibold hover:from-emerald-600 hover:to-teal-700 transition-all duration-300 shadow-lg hover:shadow-xl">
+                          <Download className="w-4 h-4 group-hover/btn:translate-y-0.5 transition-transform" />
+                          <span>Télécharger</span>
+                        </button>
+                      </div>
                     </div>
                   </div>
-                </div>
-              ))}
-            </div>
+                ))}
+              </div>
+            )}
           </div>
 
           {/* Right Column - Webinars */}

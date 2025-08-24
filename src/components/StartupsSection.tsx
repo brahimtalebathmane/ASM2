@@ -126,15 +126,38 @@ const StartupsSection = () => {
         </div>
 
         {/* CTA Section */}
-        <div className="mt-16 text-center bg-gradient-to-r from-blue-900 to-blue-800 rounded-3xl p-12 text-white">
-          <h3 className="text-3xl font-bold mb-4">Votre startup n'est pas listée ?</h3>
-          <p className="text-xl text-blue-200 mb-8">
-            Rejoignez notre communauté d'entrepreneurs innovants
-          </p>
-          <button className="bg-gradient-to-r from-emerald-500 to-teal-600 text-white px-8 py-4 rounded-lg font-semibold hover:from-emerald-600 hover:to-teal-700 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1">
-            Devenir Membre
-          </button>
-        </div>
+        {filteredStartups.length === 0 ? (
+          <div className="text-center py-16">
+            <div className="max-w-md mx-auto">
+              <div className="w-24 h-24 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                <Users className="w-12 h-12 text-gray-400" />
+              </div>
+              <h3 className="text-2xl font-bold text-gray-900 mb-4">Aucune startup pour le moment</h3>
+              <p className="text-gray-600 mb-8">
+                Les startups membres apparaîtront ici une fois ajoutées via le CMS.
+              </p>
+              <div className="bg-gradient-to-r from-blue-900 to-blue-800 rounded-2xl p-8 text-white">
+                <h4 className="text-xl font-bold mb-4">Votre startup n'est pas listée ?</h4>
+                <p className="text-blue-200 mb-6">
+                  Rejoignez notre communauté d'entrepreneurs innovants
+                </p>
+                <button className="bg-gradient-to-r from-emerald-500 to-teal-600 text-white px-8 py-4 rounded-lg font-semibold hover:from-emerald-600 hover:to-teal-700 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1">
+                  Devenir Membre
+                </button>
+              </div>
+            </div>
+          </div>
+        ) : (
+          <div className="mt-16 text-center bg-gradient-to-r from-blue-900 to-blue-800 rounded-3xl p-12 text-white">
+            <h3 className="text-3xl font-bold mb-4">Votre startup n'est pas listée ?</h3>
+            <p className="text-xl text-blue-200 mb-8">
+              Rejoignez notre communauté d'entrepreneurs innovants
+            </p>
+            <button className="bg-gradient-to-r from-emerald-500 to-teal-600 text-white px-8 py-4 rounded-lg font-semibold hover:from-emerald-600 hover:to-teal-700 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1">
+              Devenir Membre
+            </button>
+          </div>
+        )}
       </div>
     </section>
   );

@@ -56,23 +56,37 @@ const PartnersSection = () => {
         </div>
 
         {/* Partners Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8 mb-16">
-          {partners.map((partner) => (
-            <div key={partner.id} className="group bg-white rounded-2xl p-6 shadow-md hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 text-center">
-              <img
-                src={partner.logo}
-                alt={partner.name}
-                className="w-16 h-16 mx-auto mb-4 rounded-lg object-cover group-hover:scale-110 transition-transform duration-300"
-              />
-              <h3 className="font-bold text-gray-900 mb-2 text-sm group-hover:text-emerald-600 transition-colors">
-                {partner.name}
-              </h3>
-              <span className="text-xs text-emerald-600 bg-emerald-50 px-2 py-1 rounded-full">
-                {partner.category}
-              </span>
+        {partners.length === 0 ? (
+          <div className="text-center py-16 mb-16">
+            <div className="max-w-md mx-auto">
+              <div className="w-24 h-24 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                <Handshake className="w-12 h-12 text-gray-400" />
+              </div>
+              <h3 className="text-2xl font-bold text-gray-900 mb-4">Aucun partenaire pour le moment</h3>
+              <p className="text-gray-600">
+                Les partenaires apparaîtront ici une fois ajoutés via le CMS.
+              </p>
             </div>
-          ))}
-        </div>
+          </div>
+        ) : (
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8 mb-16">
+            {partners.map((partner) => (
+              <div key={partner.id} className="group bg-white rounded-2xl p-6 shadow-md hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 text-center">
+                <img
+                  src={partner.logo}
+                  alt={partner.name}
+                  className="w-16 h-16 mx-auto mb-4 rounded-lg object-cover group-hover:scale-110 transition-transform duration-300"
+                />
+                <h3 className="font-bold text-gray-900 mb-2 text-sm group-hover:text-emerald-600 transition-colors">
+                  {partner.name}
+                </h3>
+                <span className="text-xs text-emerald-600 bg-emerald-50 px-2 py-1 rounded-full">
+                  {partner.category}
+                </span>
+              </div>
+            ))}
+          </div>
+        )}
 
         {/* Partnership Benefits */}
         <div className="mb-16">

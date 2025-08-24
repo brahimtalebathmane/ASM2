@@ -65,73 +65,89 @@ const EventsSection = () => {
         </div>
 
         {/* Events Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-8">
-          {currentEvents.map((event) => (
-            <div key={event.id} className="group bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 overflow-hidden">
-              {/* Image */}
-              <div className="relative h-48 overflow-hidden">
-                <img
-                  src={event.image}
-                  alt={event.title}
-                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
-                />
-                <div className="absolute top-4 left-4 bg-emerald-500 text-white px-3 py-1 rounded-full text-sm font-semibold">
-                  {event.type}
-                </div>
-                {activeTab === 'upcoming' && (
-                  <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm rounded-lg px-3 py-1">
-                    <div className="flex items-center space-x-1">
-                      <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
-                      <span className="text-xs font-semibold text-gray-800">À venir</span>
-                    </div>
-                  </div>
-                )}
+        {currentEvents.length === 0 ? (
+          <div className="text-center py-16">
+            <div className="max-w-md mx-auto">
+              <div className="w-24 h-24 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                <Calendar className="w-12 h-12 text-gray-400" />
               </div>
-
-              {/* Content */}
-              <div className="p-6">
-                <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-emerald-600 transition-colors">
-                  {event.title}
-                </h3>
-                
-                <p className="text-gray-600 mb-4 line-clamp-2">
-                  {event.description}
-                </p>
-
-                {/* Event Details */}
-                <div className="space-y-2 mb-6">
-                  <div className="flex items-center space-x-2 text-sm text-gray-600">
-                    <Calendar className="w-4 h-4 text-emerald-500" />
-                    <span>{event.date}</span>
+              <h3 className="text-2xl font-bold text-gray-900 mb-4">
+                Aucun événement {activeTab === 'upcoming' ? 'à venir' : 'passé'} pour le moment
+              </h3>
+              <p className="text-gray-600">
+                Les événements apparaîtront ici une fois ajoutés via le CMS.
+              </p>
+            </div>
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-8">
+            {currentEvents.map((event) => (
+              <div key={event.id} className="group bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 overflow-hidden">
+                {/* Image */}
+                <div className="relative h-48 overflow-hidden">
+                  <img
+                    src={event.image}
+                    alt={event.title}
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                  />
+                  <div className="absolute top-4 left-4 bg-emerald-500 text-white px-3 py-1 rounded-full text-sm font-semibold">
+                    {event.type}
                   </div>
-                  
-                  {event.time && (
-                    <div className="flex items-center space-x-2 text-sm text-gray-600">
-                      <Clock className="w-4 h-4 text-emerald-500" />
-                      <span>{event.time}</span>
+                  {activeTab === 'upcoming' && (
+                    <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm rounded-lg px-3 py-1">
+                      <div className="flex items-center space-x-1">
+                        <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+                        <span className="text-xs font-semibold text-gray-800">À venir</span>
+                      </div>
                     </div>
                   )}
-                  
-                  <div className="flex items-center space-x-2 text-sm text-gray-600">
-                    <MapPin className="w-4 h-4 text-emerald-500" />
-                    <span>{event.location}</span>
-                  </div>
-                  
-                  <div className="flex items-center space-x-2 text-sm text-gray-600">
-                    <Users className="w-4 h-4 text-emerald-500" />
-                    <span>{event.attendees} participants</span>
-                  </div>
                 </div>
 
-                {/* CTA */}
-                <button className="group/btn w-full bg-gradient-to-r from-emerald-500 to-teal-600 text-white py-3 rounded-lg font-semibold hover:from-emerald-600 hover:to-teal-700 transition-all duration-300 shadow-lg hover:shadow-xl flex items-center justify-center space-x-2">
-                  <span>{activeTab === 'upcoming' ? 'S\'inscrire' : 'Voir plus'}</span>
-                  <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
-                </button>
+                {/* Content */}
+                <div className="p-6">
+                  <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-emerald-600 transition-colors">
+                    {event.title}
+                  </h3>
+                  
+                  <p className="text-gray-600 mb-4 line-clamp-2">
+                    {event.description}
+                  </p>
+
+                  {/* Event Details */}
+                  <div className="space-y-2 mb-6">
+                    <div className="flex items-center space-x-2 text-sm text-gray-600">
+                      <Calendar className="w-4 h-4 text-emerald-500" />
+                      <span>{event.date}</span>
+                    </div>
+                    
+                    {event.time && (
+                      <div className="flex items-center space-x-2 text-sm text-gray-600">
+                        <Clock className="w-4 h-4 text-emerald-500" />
+                        <span>{event.time}</span>
+                      </div>
+                    )}
+                    
+                    <div className="flex items-center space-x-2 text-sm text-gray-600">
+                      <MapPin className="w-4 h-4 text-emerald-500" />
+                      <span>{event.location}</span>
+                    </div>
+                    
+                    <div className="flex items-center space-x-2 text-sm text-gray-600">
+                      <Users className="w-4 h-4 text-emerald-500" />
+                      <span>{event.attendees} participants</span>
+                    </div>
+                  </div>
+
+                  {/* CTA */}
+                  <button className="group/btn w-full bg-gradient-to-r from-emerald-500 to-teal-600 text-white py-3 rounded-lg font-semibold hover:from-emerald-600 hover:to-teal-700 transition-all duration-300 shadow-lg hover:shadow-xl flex items-center justify-center space-x-2">
+                    <span>{activeTab === 'upcoming' ? 'S\'inscrire' : 'Voir plus'}</span>
+                    <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
+                  </button>
+                </div>
               </div>
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
+        )}
 
         {/* Newsletter CTA */}
         <div className="mt-16 bg-gradient-to-r from-blue-900 to-blue-800 rounded-3xl p-12 text-white text-center">
