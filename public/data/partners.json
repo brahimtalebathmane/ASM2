@@ -1,11 +1,6 @@
 {
   "partners": [
     {
-      "name": "Banque Atlantique Mauritanie",
-      "logo": "https://images.pexels.com/photos/3184360/pexels-photo-3184360.jpeg?auto=compress&cs=tinysrgb&w=200",
-      "url": "https://atlantiquebank.mr"
-    },
-    {
       "name": "Université de Nouakchott",
       "logo": "https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg?auto=compress&cs=tinysrgb&w=200",
       "url": "https://univ-nouakchott.mr"
