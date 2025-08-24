@@ -126,10 +126,10 @@ const EventsSection = () => {
                         <span>{event.time}</span>
                       </div>
                     )}
-                  <div className="flex items-center space-x-2 text-sm text-gray-600">
-                    <Clock className="w-4 h-4 text-emerald-500" />
-                    <span>{new Date(event.date).toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' })}</span>
-                  </div>
+                    <div className="flex items-center space-x-2 text-sm text-gray-600">
+                      <Clock className="w-4 h-4 text-emerald-500" />
+                      <span>{new Date(event.date).toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' })}</span>
+                    </div>
                     <div className="flex items-center space-x-2 text-sm text-gray-600">
                       <Users className="w-4 h-4 text-emerald-500" />
                       <span>{event.attendees} participants</span>
@@ -140,7 +140,8 @@ const EventsSection = () => {
               </div>
             ))}
           </div>
-                  <span>En savoir plus</span>
+        )}
+        <span>En savoir plus</span>
 
         {/* Newsletter CTA */}
         <div className="mt-16 bg-gradient-to-r from-blue-900 to-blue-800 rounded-3xl p-12 text-white text-center">
