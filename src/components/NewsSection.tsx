@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Calendar, User, ArrowRight, TrendingUp, Star } from 'lucide-react';
+import { Calendar, ArrowRight, TrendingUp } from 'lucide-react';
 import { useDynamicContent } from '../hooks/useDynamicContent';
 
 const NewsSection = () => {
@@ -11,9 +11,6 @@ const NewsSection = () => {
   const filteredNews = news.filter(article => 
     selectedCategory === 'Tous' || article.category === selectedCategory
   );
-
-  const featuredArticle = news.find(article => article.featured);
-  const regularArticles = filteredNews.filter(article => !article.featured);
 
   if (loading) {
     return (
@@ -59,57 +56,7 @@ const NewsSection = () => {
           ))}
         </div>
 
-        {/* Featured Article */}
-        {featuredArticle && selectedCategory === 'Tous' && (
-          <div className="mb-16">
-            <div className="bg-white rounded-3xl shadow-xl overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2">
-              <div className="lg:flex">
-                <div className="lg:w-1/2">
-                  <img
-                    src={featuredArticle.image}
-                    alt={featuredArticle.title}
-                    className="w-full h-64 lg:h-full object-cover"
-                  />
-                </div>
-                <div className="lg:w-1/2 p-8 lg:p-12">
-                  <div className="flex items-center space-x-4 mb-4">
-                    <span className="bg-gradient-to-r from-emerald-500 to-blue-600 text-white px-4 py-2 rounded-full text-sm font-bold flex items-center">
-                      <Star className="w-4 h-4 mr-2" />
-                      Article Vedette
-                    </span>
-                    <span className="bg-emerald-100 text-emerald-800 px-3 py-1 rounded-full text-sm font-semibold">
-                      {featuredArticle.category}
-                    </span>
-                  </div>
-                  
-                  <h3 className="text-3xl font-bold text-gray-900 mb-4 hover:text-emerald-600 transition-colors">
-                    {featuredArticle.title}
-                  </h3>
-                  
-                  <p className="text-gray-600 mb-6 text-lg leading-relaxed">
-                    {featuredArticle.excerpt}
-                  </p>
-
-                  <div className="flex items-center justify-between mb-6">
-                    <div className="flex items-center space-x-4 text-sm text-gray-500">
-                      <div className="flex items-center space-x-2">
-                        <Calendar className="w-4 h-4" />
-                        <span>{new Date(featuredArticle.date).toLocaleDateString('fr-FR')}</span>
-                      </div>
-                    </div>
-                  </div>
-
-                  <button className="group bg-gradient-to-r from-emerald-500 to-blue-600 text-white px-8 py-4 rounded-lg font-bold hover:from-emerald-600 hover:to-blue-700 transition-all duration-300 shadow-lg hover:shadow-xl flex items-center space-x-3">
-                    <span>Lire l'article</span>
-                    <ArrowRight className="w-5 h-5 group-hover:translate-x-2 transition-transform" />
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-        )}
-
-        {/* Regular Articles Grid */}
+        {/* Articles Grid */}
         {filteredNews.length === 0 ? (
           <div className="text-center py-16">
             <div className="max-w-md mx-auto">
@@ -124,7 +71,7 @@ const NewsSection = () => {
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {regularArticles.map((article) => (
+            {filteredNews.map((article) => (
               <article key={article.id} className="group bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 overflow-hidden">
                 {/* Image */}
                 <div className="relative h-48 overflow-hidden">
@@ -167,61 +114,6 @@ const NewsSection = () => {
                 </div>
               </article>
             ))}
-          </div>
-        )}
-
-        {/* Featured Article - only show if there are articles */}
-        {featuredArticle && selectedCategory === 'Tous' && filteredNews.length > 0 && (
-          <div className="mb-16">
-            <div className="bg-white rounded-3xl shadow-xl overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2">
-              <div className="lg:flex">
-                <div className="lg:w-1/2">
-                  <img
-                    src={featuredArticle.image}
-                    alt={featuredArticle.title}
-                    className="w-full h-64 lg:h-full object-cover"
-                  />
-                </div>
-                <div className="lg:w-1/2 p-8 lg:p-12">
-                  <div className="flex items-center space-x-4 mb-4">
-                    <span className="bg-gradient-to-r from-emerald-500 to-blue-600 text-white px-4 py-2 rounded-full text-sm font-bold flex items-center">
-                      <Star className="w-4 h-4 mr-2" />
-                      Article Vedette
-                    </span>
-                    <span className="bg-emerald-100 text-emerald-800 px-3 py-1 rounded-full text-sm font-semibold">
-                      {featuredArticle.category}
-                    </span>
-                  </div>
-                  
-                  <h3 className="text-3xl font-bold text-gray-900 mb-4 hover:text-emerald-600 transition-colors">
-                    {featuredArticle.title}
-                  </h3>
-                  
-                  <p className="text-gray-600 mb-6 text-lg leading-relaxed">
-                    {featuredArticle.excerpt}
-                  </p>
-
-                  <div className="flex items-center justify-between mb-6">
-                    <div className="flex items-center space-x-4 text-sm text-gray-500">
-                      <div className="flex items-center space-x-2">
-                        <User className="w-4 h-4" />
-                        <span>{featuredArticle.author}</span>
-                      </div>
-                      <div className="flex items-center space-x-2">
-                        <Calendar className="w-4 h-4" />
-                        <span>{featuredArticle.date}</span>
-                      </div>
-                      <span>Lecture {featuredArticle.readTime}</span>
-                    </div>
-                  </div>
-
-                  <button className="group bg-gradient-to-r from-emerald-500 to-blue-600 text-white px-8 py-4 rounded-lg font-bold hover:from-emerald-600 hover:to-blue-700 transition-all duration-300 shadow-lg hover:shadow-xl flex items-center space-x-3">
-                    <span>Lire l'article</span>
-                    <ArrowRight className="w-5 h-5 group-hover:translate-x-2 transition-transform" />
-                  </button>
-                </div>
-              </div>
-            </div>
           </div>
         )}
 
