@@ -23,6 +23,12 @@
       "description": "Dwaye est une startup mauritanienne spécialisée dans la livraison de médicaments. Grâce à son application mobile, elle permet aux utilisateurs de rechercher facilement leurs médicaments, de comparer les disponibilités et de se faire livrer rapidement à domicile, en toute sécurité.\nAdresse : Nouakchott-Mauritanie",
       "url": "dwaye.com",
       "logo": "/images/uploads/mauritanian-startups-association-8-.png"
+    },
+    {
+      "name": "Critical Spot",
+      "description": "Startup spécialisée dans l’exploration minière assistée par intelligence artificielle, utilisant l’analyse avancée de données géologiques, géophysiques et satellitaires pour identifier les gisements d’or et de minéraux critiques les plus prometteurs et optimaux. ",
+      "logo": "/images/uploads/mauritanian-startups-association-3-.png",
+      "url": "criticalspot.com"
     }
   ]
 }
