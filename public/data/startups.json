@@ -17,6 +17,12 @@
       "logo": "/images/uploads/mauritanian-startups-association-5-.png",
       "description": "BetaClic est une Statup innovante mauritanienne spécialisée dans le suivi et la traçabilité du bétail. En intégrant des technologies avancées telles que l’Internet des objets (IoT), la géolocalisation et les plateformes numériques",
       "url": "https://betaclic.com"
+    },
+    {
+      "name": "Dwaye",
+      "description": "Dwaye est une startup mauritanienne spécialisée dans la livraison de médicaments. Grâce à son application mobile, elle permet aux utilisateurs de rechercher facilement leurs médicaments, de comparer les disponibilités et de se faire livrer rapidement à domicile, en toute sécurité.\nAdresse : Nouakchott-Mauritanie",
+      "url": "dwaye.com",
+      "logo": "/images/uploads/mauritanian-startups-association-8-.png"
     }
   ]
 }
