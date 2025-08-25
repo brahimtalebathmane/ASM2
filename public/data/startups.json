@@ -1,10 +1,10 @@
 {
   "startups": [
     {
-      "name": "MauriPay",
-      "logo": "https://images.pexels.com/photos/3184360/pexels-photo-3184360.jpeg?auto=compress&cs=tinysrgb&w=200",
-      "description": "Solution de paiement mobile révolutionnaire pour la Mauritanie, permettant des transactions sécurisées et instantanées.",
-      "url": "https://mauripay.mr"
+      "name": "Tedrim",
+      "logo": "/images/uploads/images.jpg",
+      "description": "Startup pluridisciplinaire, offrant des solutions innovantes en géomatique, BTP et formation professionnelle pour un développement durable et une innovation technologique.",
+      "url": "https://tedrim.com"
     },
     {
       "name": "EduMauri",
