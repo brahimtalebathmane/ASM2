@@ -29,6 +29,12 @@
       "description": "Startup spécialisée dans l’exploration minière assistée par intelligence artificielle, utilisant l’analyse avancée de données géologiques, géophysiques et satellitaires pour identifier les gisements d’or et de minéraux critiques les plus prometteurs et optimaux. ",
       "logo": "/images/uploads/mauritanian-startups-association-3-.png",
       "url": "criticalspot.com"
+    },
+    {
+      "name": "Sting App",
+      "logo": "/images/uploads/mauritanian-startups-association.png",
+      "description": "Sting App est une plateforme numérique conçue pour connecter les fournisseurs, les entreprises et les pharmacies, facilitant ainsi les échanges commerciaux et la gestion des approvisionnements dans le secteur pharmaceutique.",
+      "url": "stingapp.com"
     }
   ]
 }
