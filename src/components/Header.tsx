@@ -55,7 +55,7 @@ const Header = () => {
               }`}>{siteConfig.abbreviation || "MSA"}</h1>
               <p className={`text-xs transition-colors ${
                 isScrolled ? 'text-gray-600' : 'text-blue-100'
-              }`}>Association Mauritanienne</p>
+              }`}>Mauritanian Startup Association</p>
             </div>
           </div>
 
