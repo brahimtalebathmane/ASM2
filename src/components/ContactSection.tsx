@@ -156,101 +156,27 @@ const ContactSection = () => {
           {/* Contact Form */}
           <div className="lg:col-span-2">
             <div className="bg-white rounded-3xl shadow-xl p-8">
-              <h3 className="text-2xl font-bold text-gray-900 mb-6">Envoyez-nous un message</h3>
+              <h3 className="text-2xl font-bold text-gray-900 mb-6">Contactez-nous directement</h3>
               
-              <form onSubmit={handleSubmit} className="space-y-6">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div>
-                    <label htmlFor="name" className="block text-sm font-semibold text-gray-700 mb-2">
-                      Nom complet *
-                    </label>
-                    <input
-                      type="text"
-                      id="name"
-                      name="name"
-                      required
-                      value={formData.name}
-                      onChange={handleInputChange}
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-all duration-300"
-                      placeholder="Votre nom complet"
-                    />
-                  </div>
-
-                  <div>
-                    <label htmlFor="email" className="block text-sm font-semibold text-gray-700 mb-2">
-                      Email *
-                    </label>
-                    <input
-                      type="email"
-                      id="email"
-                      name="email"
-                      required
-                      value={formData.email}
-                      onChange={handleInputChange}
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-all duration-300"
-                      placeholder="votre@email.com"
-                    />
-                  </div>
-                </div>
-
-                <div>
-                  <label htmlFor="subject" className="block text-sm font-semibold text-gray-700 mb-2">
-                    Sujet *
-                  </label>
-                  <select
-                    id="subject"
-                    name="subject"
-                    required
-                    value={formData.subject}
-                    onChange={handleInputChange}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-all duration-300"
-                  >
-                    <option value="">Sélectionnez un sujet</option>
-                    <option value="adhesion">Demande d'adhésion</option>
-                    <option value="partenariat">Partenariat</option>
-                    <option value="evenement">Organisation d'événement</option>
-                    <option value="support">Support technique</option>
-                    <option value="media">Demande presse/média</option>
-                    <option value="autre">Autre</option>
-                  </select>
-                </div>
-
-                <div>
-                  <label htmlFor="message" className="block text-sm font-semibold text-gray-700 mb-2">
-                    Message *
-                  </label>
-                  <textarea
-                    id="message"
-                    name="message"
-                    required
-                    value={formData.message}
-                    onChange={handleInputChange}
-                    rows={6}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-all duration-300 resize-none"
-                    placeholder="Décrivez votre demande en détail..."
-                  ></textarea>
-                </div>
-
-                <div className="flex items-center space-x-3">
-                  <input
-                    type="checkbox"
-                    id="consent"
-                    required
-                    className="w-4 h-4 text-emerald-600 focus:ring-emerald-500 border-gray-300 rounded"
-                  />
-                  <label htmlFor="consent" className="text-sm text-gray-600">
-                    J'accepte que mes données soient utilisées pour traiter ma demande *
-                  </label>
-                </div>
-
-                <button
-                  type="submit"
-                  className="group w-full bg-gradient-to-r from-emerald-500 to-blue-600 text-white py-4 px-6 rounded-lg font-bold text-lg hover:from-emerald-600 hover:to-blue-700 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1 flex items-center justify-center space-x-3"
+              <div className="text-center py-12">
+                <MessageCircle className="w-16 h-16 text-emerald-500 mx-auto mb-6" />
+                <h4 className="text-xl font-bold text-gray-900 mb-4">
+                  Prêt à nous contacter ?
+                </h4>
+                <p className="text-gray-600 mb-8 max-w-md mx-auto">
+                  Cliquez sur le bouton ci-dessous pour nous envoyer un email directement depuis votre client de messagerie.
+                </p>
+                
+                <a
+                  href="mailto:mauristartups@gmail.com"
+                  className="group inline-block bg-gradient-to-r from-emerald-500 to-blue-600 text-white py-4 px-8 rounded-lg font-bold text-lg hover:from-emerald-600 hover:to-blue-700 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1"
                 >
-                  <Send className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                  <span>Envoyer le message</span>
-                </button>
-              </form>
+                  <div className="flex items-center space-x-3">
+                    <Send className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                    <span>Nous contacter</span>
+                  </div>
+                </a>
+              </div>
             </div>
 
             {/* FAQ Quick Links */}

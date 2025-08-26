@@ -106,7 +106,7 @@ const EventsSection = () => {
                 {/* Content */}
                 <div className="p-6">
                   <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-emerald-600 transition-colors">
-                    <span>{new Date(event.date).toLocaleDateString('fr-FR')}</span>
+                    {event.title}
                   </h3>
                   
                   <p className="text-gray-600 mb-4 line-clamp-2">
@@ -136,29 +136,32 @@ const EventsSection = () => {
                     </div>
                   </div>
 
+                  {/* CTA */}
+                  <a
+                    href="mailto:mauristartups@gmail.com"
+                    className="group/btn w-full bg-gradient-to-r from-emerald-500 to-blue-600 text-white py-3 rounded-lg font-semibold hover:from-emerald-600 hover:to-blue-700 transition-all duration-300 flex items-center justify-center space-x-2"
+                  >
+                    <span>En savoir plus</span>
+                    <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
+                  </a>
                 </div>
               </div>
             ))}
           </div>
         )}
-        <span>En savoir plus</span>
 
         {/* Newsletter CTA */}
         <div className="mt-16 bg-gradient-to-r from-blue-900 to-blue-800 rounded-3xl p-12 text-white text-center">
           <h3 className="text-3xl font-bold mb-4">Restez informé</h3>
           <p className="text-xl text-blue-200 mb-8">
-            Inscrivez-vous à notre newsletter pour ne manquer aucun événement
+            Contactez-nous pour ne manquer aucun événement et recevoir nos actualités
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
-            <input
-              type="email"
-              placeholder="Votre email"
-              className="flex-1 px-4 py-3 rounded-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-emerald-500"
-            />
-            <button className="bg-gradient-to-r from-emerald-500 to-teal-600 text-white px-6 py-3 rounded-lg font-semibold hover:from-emerald-600 hover:to-teal-700 transition-all duration-300 shadow-lg hover:shadow-xl">
-              S'abonner
-            </button>
-          </div>
+          <a
+            href="mailto:mauristartups@gmail.com"
+            className="inline-block bg-gradient-to-r from-emerald-500 to-teal-600 text-white px-8 py-4 rounded-lg font-semibold hover:from-emerald-600 hover:to-teal-700 transition-all duration-300 shadow-lg hover:shadow-xl"
+          >
+            Nous contacter
+          </a>
         </div>
       </div>
     </section>

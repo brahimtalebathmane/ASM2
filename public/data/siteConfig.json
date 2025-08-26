@@ -5,5 +5,21 @@
   "abbreviation": "MSA",
   "email": "mauristartups@gmail.com",
   "phone": "+222 44 09 26 55",
-  "address": "Nouakchott, Mauritanie"
+  "address": "Nouakchott, Mauritanie",
+  "testimonials": [
+    {
+      "name": "Ahmed Ould Mohamed",
+      "position": "Directeur",
+      "company": "Banque Atlantique",
+      "avatar": "https://images.pexels.com/photos/3184360/pexels-photo-3184360.jpeg?auto=compress&cs=tinysrgb&w=100",
+      "testimonial": "Notre partenariat avec l'AMS nous permet d'identifier et de soutenir les startups les plus prometteuses. C'est un investissement dans l'avenir économique de la Mauritanie."
+    },
+    {
+      "name": "Dr. Fatima Mint Salem",
+      "position": "Recteur",
+      "company": "Université de Nouakchott",
+      "avatar": "https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg?auto=compress&cs=tinysrgb&w=100",
+      "testimonial": "La collaboration avec l'AMS enrichit notre mission éducative en connectant nos étudiants avec l'écosystème entrepreneurial réel."
+    }
+  ]
 }

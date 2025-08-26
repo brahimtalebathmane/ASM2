@@ -20,6 +20,15 @@ collections:
           - {label: "Contact Email", name: "email", widget: "string"}
           - {label: "Contact Phone", name: "phone", widget: "string"}
           - {label: "Address", name: "address", widget: "string"}
+          - label: "Partner Testimonials"
+            name: "testimonials"
+            widget: "list"
+            fields:
+              - {label: "Name", name: "name", widget: "string"}
+              - {label: "Position", name: "position", widget: "string"}
+              - {label: "Company", name: "company", widget: "string"}
+              - {label: "Avatar", name: "avatar", widget: "image"}
+              - {label: "Testimonial", name: "testimonial", widget: "text"}
 
   - name: "hero"
     label: "Hero Section"

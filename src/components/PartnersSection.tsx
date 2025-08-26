@@ -1,9 +1,13 @@
 import React from 'react';
 import { Handshake, Building, Award, Users } from 'lucide-react';
 import { useDynamicContent } from '../hooks/useDynamicContent';
+import { useCMS } from './CMSProvider';
 
 const PartnersSection = () => {
   const { data: partners, loading } = useDynamicContent('partners');
+  const { data: cmsData } = useCMS();
+  
+  const testimonials = cmsData?.siteConfig?.testimonials || [];
 
   const partnershipBenefits = [
     {
@@ -122,12 +126,18 @@ const PartnersSection = () => {
           </p>
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <button className="bg-gradient-to-r from-emerald-500 to-teal-600 text-white px-8 py-4 rounded-lg font-semibold hover:from-emerald-600 hover:to-teal-700 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1">
+            <a
+              href="mailto:mauristartups@gmail.com"
+              className="inline-block bg-gradient-to-r from-emerald-500 to-teal-600 text-white px-8 py-4 rounded-lg font-semibold hover:from-emerald-600 hover:to-teal-700 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1 text-center"
+            >
               Devenir Partenaire
-            </button>
-            <button className="border-2 border-white/30 text-white px-8 py-4 rounded-lg font-semibold hover:bg-white/10 transition-all duration-300 backdrop-blur-sm">
+            </a>
+            <a
+              href="mailto:mauristartups@gmail.com"
+              className="inline-block border-2 border-white/30 text-white px-8 py-4 rounded-lg font-semibold hover:bg-white/10 transition-all duration-300 backdrop-blur-sm text-center"
+            >
               En savoir plus
-            </button>
+            </a>
           </div>
         </div>
 
@@ -137,40 +147,32 @@ const PartnersSection = () => {
             Témoignages de nos <span className="text-emerald-500">partenaires</span>
           </h3>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div className="bg-white p-8 rounded-2xl shadow-lg">
-              <div className="flex items-center mb-4">
-                <img
-                  src="https://images.pexels.com/photos/3184360/pexels-photo-3184360.jpeg?auto=compress&cs=tinysrgb&w=100"
-                  alt="Directeur Banque Atlantique"
-                  className="w-12 h-12 rounded-full mr-4"
-                />
-                <div>
-                  <h4 className="font-bold text-gray-900">Ahmed Ould Mohamed</h4>
-                  <p className="text-sm text-gray-600">Directeur, Banque Atlantique</p>
-                </div>
-              </div>
-              <p className="text-gray-700 italic">
-                "Notre partenariat avec l'AMS nous permet d'identifier et de soutenir les startups les plus prometteuses. C'est un investissement dans l'avenir économique de la Mauritanie."
-              </p>
+          {testimonials.length === 0 ? (
+            <div className="text-center py-8">
+              <p className="text-gray-600">Aucun témoignage pour le moment. Ajoutez-en via le CMS.</p>
             </div>
-
-            <div className="bg-white p-8 rounded-2xl shadow-lg">
-              <div className="flex items-center mb-4">
-                <img
-                  src="https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg?auto=compress&cs=tinysrgb&w=100"
-                  alt="Recteur Université"
-                  className="w-12 h-12 rounded-full mr-4"
-                />
-                <div>
-                  <h4 className="font-bold text-gray-900">Dr. Fatima Mint Salem</h4>
-                  <p className="text-sm text-gray-600">Recteur, Université de Nouakchott</p>
+          ) : (
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              {testimonials.map((testimonial: any, index: number) => (
+                <div key={index} className="bg-white p-8 rounded-2xl shadow-lg">
+                  <div className="flex items-center mb-4">
+                    <img
+                      src={testimonial.avatar}
+                      alt={testimonial.name}
+                      className="w-12 h-12 rounded-full mr-4 object-cover"
+                    />
+                    <div>
+                      <h4 className="font-bold text-gray-900">{testimonial.name}</h4>
+                      <p className="text-sm text-gray-600">{testimonial.position}, {testimonial.company}</p>
+                    </div>
+                  </div>
+                  <p className="text-gray-700 italic">
+                    "{testimonial.testimonial}"
+                  </p>
                 </div>
-              </div>
-              <p className="text-gray-700 italic">
-                "La collaboration avec l'AMS enrichit notre mission éducative en connectant nos étudiants avec l'écosystème entrepreneurial réel."
-              </p>
+              ))}
             </div>
+          )}
           </div>
         </div>
       </div>

@@ -128,18 +128,23 @@ const Footer = () => {
             <div className="text-center lg:text-left mb-6 lg:mb-0">
               <h4 className="text-2xl font-bold text-emerald-400 mb-2">Restez connecté</h4>
               <p className="text-gray-300">
-                Recevez les dernières actualités de l'écosystème startup mauritanien
+                Contactez-nous pour recevoir les dernières actualités de l'écosystème startup mauritanien
               </p>
             </div>
             
-            <div className="flex flex-col sm:flex-row gap-4 w-full lg:w-auto lg:min-w-96">
-              <input
-                type="email"
-                placeholder="Votre adresse email"
-                className="flex-1 px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent backdrop-blur-sm"
-              />
-              <button className="bg-gradient-to-r from-emerald-500 to-emerald-600 text-white px-6 py-3 rounded-lg font-semibold hover:from-emerald-600 hover:to-emerald-700 transition-all duration-300 shadow-lg hover:shadow-xl flex items-center space-x-2">
-                <span>S'abonner</span>
+            <div className="w-full lg:w-auto">
+              <a
+                href="mailto:mauristartups@gmail.com"
+                className="inline-block bg-gradient-to-r from-emerald-500 to-emerald-600 text-white px-6 py-3 rounded-lg font-semibold hover:from-emerald-600 hover:to-emerald-700 transition-all duration-300 shadow-lg hover:shadow-xl"
+              >
+                <div className="flex items-center space-x-2">
+                  <span>Nous contacter</span>
+                  <ArrowRight className="w-4 h-4" />
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
                 <ArrowRight className="w-4 h-4" />
               </button>
             </div>

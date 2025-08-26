@@ -107,10 +107,13 @@ const NewsSection = () => {
                   </div>
 
                   {/* CTA */}
-                  <button className="group/btn w-full bg-gradient-to-r from-emerald-500 to-blue-600 text-white py-3 rounded-lg font-semibold hover:from-emerald-600 hover:to-blue-700 transition-all duration-300 flex items-center justify-center space-x-2">
+                  <a
+                    href="mailto:mauristartups@gmail.com"
+                    className="group/btn w-full bg-gradient-to-r from-emerald-500 to-blue-600 text-white py-3 rounded-lg font-semibold hover:from-emerald-600 hover:to-blue-700 transition-all duration-300 flex items-center justify-center space-x-2"
+                  >
                     <span>Lire plus</span>
                     <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
-                  </button>
+                  </a>
                 </div>
               </article>
             ))}
@@ -122,21 +125,14 @@ const NewsSection = () => {
           <TrendingUp className="w-16 h-16 text-emerald-400 mx-auto mb-6" />
           <h3 className="text-3xl font-bold mb-4">Restez à la pointe de l'innovation</h3>
           <p className="text-xl text-blue-200 mb-8 max-w-2xl mx-auto">
-            Recevez chaque semaine les dernières actualités de l'écosystème startup mauritanien directement dans votre boîte mail
+            Contactez-nous pour recevoir les dernières actualités de l'écosystème startup mauritanien
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
-            <input
-              type="email"
-              placeholder="Votre adresse email"
-              className="flex-1 px-6 py-4 rounded-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-emerald-500 placeholder-gray-500"
-            />
-            <button className="bg-gradient-to-r from-emerald-500 to-emerald-600 text-white px-8 py-4 rounded-lg font-bold hover:from-emerald-600 hover:to-emerald-700 transition-all duration-300 shadow-lg hover:shadow-xl">
-              S'abonner
-            </button>
-          </div>
-          <p className="text-sm text-blue-300 mt-4">
-            Plus de 1,500 entrepreneurs nous font déjà confiance
-          </p>
+          <a
+            href="mailto:mauristartups@gmail.com"
+            className="inline-block bg-gradient-to-r from-emerald-500 to-emerald-600 text-white px-8 py-4 rounded-lg font-bold hover:from-emerald-600 hover:to-emerald-700 transition-all duration-300 shadow-lg hover:shadow-xl"
+          >
+            Nous contacter
+          </a>
         </div>
       </div>
     </section>

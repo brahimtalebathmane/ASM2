@@ -52,7 +52,7 @@ const Header = () => {
           <div className="flex items-center space-x-3">
             <div className="relative">
               <img
-                src={siteConfig.logo || "https://i.postimg.cc/GppXFY5g/18.png"}
+                src="https://i.postimg.cc/GppXFY5g/18.png"
                 alt={siteConfig.title || "Association Mauritanienne des Startups"}
                 className="h-14 w-auto object-contain"
               />
@@ -118,7 +118,7 @@ const Header = () => {
           {/* CTA Button */}
           <div className="hidden lg:flex">
             <a
-              href="#adhesion"
+              href="mailto:mauristartups@gmail.com"
               className="bg-gradient-to-r from-green-500 to-green-600 text-white px-6 py-3 rounded-lg font-semibold hover:from-green-600 hover:to-green-700 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
             >
               Devenir Membre
@@ -145,7 +145,7 @@ const Header = () => {
               {menuItems.map((item) => (
                 <a
                   key={item.label}
-                  href={item.href}
+                  href="mailto:mauristartups@gmail.com"
                   className="block text-gray-700 hover:text-green-600 transition-colors font-medium px-4 py-2"
                   onClick={() => setIsMenuOpen(false)}
                 >
@@ -153,7 +153,7 @@ const Header = () => {
                 </a>
               ))}
               <a
-                href="#adhesion"
+                href="mailto:mauristartups@gmail.com"
                 className="block w-full bg-gradient-to-r from-green-500 to-green-600 text-white px-4 py-3 rounded-lg font-semibold text-center mx-4"
                 onClick={() => setIsMenuOpen(false)}
               >

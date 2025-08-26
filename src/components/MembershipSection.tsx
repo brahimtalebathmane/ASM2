@@ -121,7 +121,8 @@ const MembershipSection = () => {
                 </ul>
 
                 {/* CTA */}
-                <button
+                <a
+                  href="mailto:mauristartups@gmail.com"
                   className={`w-full py-4 rounded-lg font-bold text-lg transition-all duration-300 flex items-center justify-center space-x-2 ${
                     plan.popular
                       ? 'bg-gradient-to-r from-emerald-500 to-emerald-600 text-white hover:from-emerald-600 hover:to-emerald-700 shadow-lg hover:shadow-xl'
@@ -130,7 +131,7 @@ const MembershipSection = () => {
                 >
                   <span>Choisir ce plan</span>
                   <ArrowRight className="w-5 h-5" />
-                </button>
+                </a>
               </div>
             </div>
           ))}
@@ -142,113 +143,21 @@ const MembershipSection = () => {
             <div className="text-center mb-8">
               <h3 className="text-3xl font-bold mb-4">Prêt à nous rejoindre ?</h3>
               <p className="text-blue-200 text-lg">
-                Remplissez ce formulaire et notre équipe vous contactera dans les 24h pour finaliser votre adhésion
+                Contactez-nous directement pour finaliser votre adhésion et rejoindre notre communauté d'entrepreneurs
               </p>
             </div>
 
-            <form className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div>
-                <label className="block text-sm font-semibold text-blue-200 mb-2">
-                  Nom de la startup *
-                </label>
-                <input
-                  type="text"
-                  required
-                  className="w-full px-4 py-3 rounded-lg bg-white/10 border border-white/20 text-white placeholder-blue-200 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent backdrop-blur-sm"
-                  placeholder="Ex: MauriTech Solutions"
-                />
-              </div>
-
-              <div>
-                <label className="block text-sm font-semibold text-blue-200 mb-2">
-                  Secteur d'activité *
-                </label>
-                <select
-                  required
-                  className="w-full px-4 py-3 rounded-lg bg-white/10 border border-white/20 text-white focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent backdrop-blur-sm"
-                >
-                  <option value="">Sélectionnez un secteur</option>
-                  <option value="fintech">FinTech</option>
-                  <option value="edtech">EdTech</option>
-                  <option value="healthtech">HealthTech</option>
-                  <option value="agritech">AgriTech</option>
-                  <option value="ecommerce">E-commerce</option>
-                  <option value="saas">SaaS</option>
-                  <option value="other">Autre</option>
-                </select>
-              </div>
-
-              <div>
-                <label className="block text-sm font-semibold text-blue-200 mb-2">
-                  Nom du fondateur *
-                </label>
-                <input
-                  type="text"
-                  required
-                  className="w-full px-4 py-3 rounded-lg bg-white/10 border border-white/20 text-white placeholder-blue-200 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent backdrop-blur-sm"
-                  placeholder="Votre nom complet"
-                />
-              </div>
-
-              <div>
-                <label className="block text-sm font-semibold text-blue-200 mb-2">
-                  Email *
-                </label>
-                <input
-                  type="email"
-                  required
-                  className="w-full px-4 py-3 rounded-lg bg-white/10 border border-white/20 text-white placeholder-blue-200 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent backdrop-blur-sm"
-                  placeholder="votre@email.com"
-                />
-              </div>
-
-              <div>
-                <label className="block text-sm font-semibold text-blue-200 mb-2">
-                  Téléphone *
-                </label>
-                <input
-                  type="tel"
-                  required
-                  className="w-full px-4 py-3 rounded-lg bg-white/10 border border-white/20 text-white placeholder-blue-200 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent backdrop-blur-sm"
-                  placeholder="+222 XX XX XX XX"
-                />
-              </div>
-
-              <div>
-                <label className="block text-sm font-semibold text-blue-200 mb-2">
-                  Plan choisi
-                </label>
-                <input
-                  type="text"
-                  value={plans.find(p => p.id === selectedPlan)?.name || ''}
-                  readOnly
-                  className="w-full px-4 py-3 rounded-lg bg-white/10 border border-white/20 text-white backdrop-blur-sm"
-                />
-              </div>
-
-              <div className="md:col-span-2">
-                <label className="block text-sm font-semibold text-blue-200 mb-2">
-                  Décrivez votre startup
-                </label>
-                <textarea
-                  rows={4}
-                  className="w-full px-4 py-3 rounded-lg bg-white/10 border border-white/20 text-white placeholder-blue-200 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent backdrop-blur-sm"
-                  placeholder="Expliquez en quelques mots ce que fait votre startup, votre vision et vos objectifs..."
-                ></textarea>
-              </div>
-
-              <div className="md:col-span-2 text-center">
-                <button
-                  type="submit"
-                  className="bg-gradient-to-r from-emerald-500 to-emerald-600 text-white px-12 py-4 rounded-lg font-bold text-lg hover:from-emerald-600 hover:to-emerald-700 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1"
-                >
-                  Envoyer ma candidature
-                </button>
-                <p className="text-blue-300 text-sm mt-4">
-                  En soumettant ce formulaire, vous acceptez nos conditions générales
-                </p>
-              </div>
-            </form>
+            <div className="text-center">
+              <a
+                href="mailto:mauristartups@gmail.com"
+                className="inline-block bg-gradient-to-r from-emerald-500 to-emerald-600 text-white px-12 py-4 rounded-lg font-bold text-lg hover:from-emerald-600 hover:to-emerald-700 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1"
+              >
+                Nous contacter pour adhérer
+              </a>
+              <p className="text-blue-300 text-sm mt-4">
+                Cliquez pour nous envoyer un email avec vos informations
+              </p>
+            </div>
           </div>
         </div>
       </div>
