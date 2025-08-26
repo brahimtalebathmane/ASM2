@@ -9,92 +9,6 @@ export const useDynamicContent = (collection: string) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  useEffect(() => {
-    const loadContent = async () => {
-      try {
-        setLoading(true);
-        setError(null);
-
-        // Add cache busting parameter
-        const cacheBuster = `?v=${Date.now()}&t=${Math.random()}`;
-        const response = await fetch(`/data/${collection}.json${cacheBuster}`);
-        
-        if (!response.ok) {
-          throw new Error(`Failed to load ${collection}: ${response.status}`);
-        }
-
-        const text = await response.text();
-        
-        // Check if we got HTML instead of JSON (404 page)
-        if (text.trim().startsWith('<!DOCTYPE html>') || text.trim().startsWith('<html')) {
-          console.warn(`Got HTML response for ${collection}, using fallback data`);
-          setData(getFallbackData(collection));
-          return;
-        }
-
-        try {
-          const jsonData = JSON.parse(text);
-          
-          // Extract the array from the JSON structure based on collection type
-          let items: ContentItem[] = [];
-          
-          switch (collection) {
-            case 'startups':
-              items = jsonData.startups || [];
-              break;
-            case 'events':
-              items = jsonData.events || [];
-              break;
-            case 'news':
-              items = jsonData.articles || [];
-              break;
-            case 'partners':
-              items = jsonData.partners || [];
-              break;
-            case 'resources':
-              items = jsonData.resources || [];
-              break;
-            default:
-              items = Array.isArray(jsonData) ? jsonData : (jsonData ? [jsonData] : []);
-          }
-          
-          // Add unique IDs if not present
-          const itemsWithIds = items.map((item, index) => ({
-            ...item,
-            id: item.id || `${collection}-${index}`
-          }));
-          
-          setData(itemsWithIds);
-        } catch (parseError) {
-          console.error(`Failed to parse JSON for ${collection}:`, parseError);
-          setData(getFallbackData(collection));
-        }
-
-      } catch (err) {
-        console.error(`Error loading ${collection}:`, err);
-        setError(err instanceof Error ? err.message : 'Unknown error');
-        setData(getFallbackData(collection));
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    loadContent();
-  }, [collection]);
-
-  const refetch = async () => {
-    await loadContent();
-  };
-
-  // Auto-refresh every 30 seconds to catch CMS updates
-  useEffect(() => {
-    const interval = setInterval(() => {
-      loadContent();
-    }, 30000);
-
-    return () => clearInterval(interval);
-  }, [collection]);
-
   const loadContent = async () => {
     try {
       setLoading(true);
@@ -163,6 +77,19 @@ export const useDynamicContent = (collection: string) => {
       setLoading(false);
     }
   };
+
+  useEffect(() => {
+    loadContent();
+  }, [collection]);
+
+  // Auto-refresh every 30 seconds to catch CMS updates
+  useEffect(() => {
+    const interval = setInterval(() => {
+      loadContent();
+    }, 30000);
+
+    return () => clearInterval(interval);
+  }, [collection]);
 
   const refetch = async () => {
     loadContent();
