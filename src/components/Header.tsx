@@ -133,23 +133,19 @@ const Header = () => {
         {isMenuOpen && (
           <div className="lg:hidden py-4 border-t border-gray-100 bg-white rounded-b-lg shadow-lg">
             <nav className="space-y-4">
-              {menuItems.map((item) => (
-                <a
-                  key={item.label}
-                  href="mailto:mauristartups@gmail.com"
-                  className="block text-gray-700 hover:text-green-600 transition-colors font-medium px-4 py-2"
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  {item.label}
-                </a>
-              ))}
-              <a
-                href="mailto:mauristartups@gmail.com"
-                className="block w-full bg-gradient-to-r from-green-500 to-green-600 text-white px-4 py-3 rounded-lg font-semibold text-center mx-4"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Devenir Membre
-              </a>
+              {menuItems.map((item) => {
+                const isEmailCTA = item.label === 'Contact' || item.label === 'Devenir Membre';
+                return (
+                  <a
+                    key={item.label}
+                    href={isEmailCTA ? 'mailto:mauristartups@gmail.com' : item.href}
+                    className="block text-gray-700 hover:text-green-600 transition-colors font-medium px-4 py-2"
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    {item.label}
+                  </a>
+                );
+              })}
             </nav>
           </div>
         )}
