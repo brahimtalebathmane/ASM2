@@ -91,11 +91,7 @@ export const useDynamicContent = (collection: string) => {
     return () => clearInterval(interval);
   }, [collection]);
 
-  const refetch = async () => {
-    loadContent();
-  };
-
-  return { data, loading, error, refetch };
+  return { data, loading, error, refetch: loadContent };
 };
 
 // Fallback data for when dynamic loading fails
