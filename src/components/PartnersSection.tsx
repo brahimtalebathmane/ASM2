@@ -173,7 +173,6 @@ const PartnersSection = () => {
               ))}
             </div>
           )}
-          </div>
         </div>
       </div>
     </section>
