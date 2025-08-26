@@ -126,7 +126,7 @@ const ResourcesSection = () => {
 
                         {/* Download Button */}
                         <a
-                          href="mailto:mauristartups@gmail.com?subject=Demande de Ressource: " + resource.title}
+                          href={"mailto:mauristartups@gmail.com?subject=Demande de Ressource: " + resource.title}
                           className="group/btn flex items-center space-x-2 bg-gradient-to-r from-emerald-500 to-teal-600 text-white px-6 py-3 rounded-lg font-semibold hover:from-emerald-600 hover:to-teal-700 transition-all duration-300 shadow-lg hover:shadow-xl"
                         >
                           <Download className="w-4 h-4 group-hover/btn:translate-y-0.5 transition-transform" />
