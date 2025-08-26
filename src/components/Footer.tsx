@@ -75,7 +75,7 @@ const Footer = () => {
               </div>
               <div className="flex items-center space-x-3">
                 <Mail className="w-5 h-5 text-emerald-400" />
-                <span className="text-gray-300">{siteConfig.email || "depanapp222@gmail.com"}</span>
+                <span className="text-gray-300">{siteConfig.email || "mauristartups@gmail.com"}</span>
               </div>
               <div className="flex items-center space-x-3">
                 <MapPin className="w-5 h-5 text-emerald-400" />
@@ -122,7 +122,7 @@ const Footer = () => {
           </div>
         </div>
 
-        {/* Newsletter */}
+        {/* Contact CTA */}
         <div className="border-t border-white/10 pt-12 mt-12">
           <div className="flex flex-col lg:flex-row items-center justify-between">
             <div className="text-center lg:text-left mb-6 lg:mb-0">
@@ -142,11 +142,6 @@ const Footer = () => {
                   <ArrowRight className="w-4 h-4" />
                 </div>
               </a>
-            </div>
-          </div>
-        </div>
-                <ArrowRight className="w-4 h-4" />
-              </button>
             </div>
           </div>
         </div>
