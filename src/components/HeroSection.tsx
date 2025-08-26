@@ -144,7 +144,7 @@ const HeroSection = () => {
               <div className="absolute bottom-6 right-6 bg-white/95 backdrop-blur-sm rounded-lg px-4 py-3 shadow-lg transform hover:scale-110 transition-transform duration-300">
                 <div className="flex items-center space-x-2">
                   <Trophy className="w-4 h-4 text-yellow-500" />
-                  <span className="text-sm font-bold text-gray-800">Prix Innovation 2024</span>
+                  <span className="text-sm font-bold text-gray-800">Association Mauritanienne</span>
                 </div>
               </div>
             </div>
