@@ -71,14 +71,20 @@ const HeroSection = () => {
             </p>
 
             <div className="flex flex-col sm:flex-row gap-6 mb-16">
-              <button className="group bg-gradient-to-r from-green-500 to-green-600 text-white px-8 py-4 rounded-lg font-bold text-lg hover:from-green-600 hover:to-green-700 transition-all duration-300 shadow-2xl hover:shadow-green-500/25 transform hover:-translate-y-2 flex items-center justify-center space-x-3">
+              <a
+                href="mailto:mauristartups@gmail.com"
+                className="group bg-gradient-to-r from-green-500 to-green-600 text-white px-8 py-4 rounded-lg font-bold text-lg hover:from-green-600 hover:to-green-700 transition-all duration-300 shadow-2xl hover:shadow-green-500/25 transform hover:-translate-y-2 flex items-center justify-center space-x-3"
+              >
                 <span>{heroContent.primaryButtonText || "Devenir Membre"}</span>
                 <ArrowRight className="w-6 h-6 group-hover:translate-x-2 transition-transform" />
-              </button>
+              </a>
               
-              <button className="border-2 border-white/30 text-white px-8 py-4 rounded-lg font-bold text-lg hover:bg-white/10 transition-all duration-300 backdrop-blur-sm hover:border-green-400">
+              <a
+                href="mailto:mauristartups@gmail.com"
+                className="border-2 border-white/30 text-white px-8 py-4 rounded-lg font-bold text-lg hover:bg-white/10 transition-all duration-300 backdrop-blur-sm hover:border-green-400 text-center"
+              >
                 {heroContent.secondaryButtonText || "Découvrir l'Écosystème"}
-              </button>
+              </a>
             </div>
 
             {/* Enhanced Animated Stats */}
@@ -146,6 +152,17 @@ const HeroSection = () => {
         </div>
       </div>
 
+              <div className="absolute bottom-6 right-6 bg-white/95 backdrop-blur-sm rounded-lg px-4 py-3 shadow-lg transform hover:scale-110 transition-transform duration-300">
+                <div className="flex items-center space-x-2">
+                  <Trophy className="w-4 h-4 text-yellow-500" />
+                  <span className="text-sm font-bold text-gray-800">Prix Innovation 2024</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
       {/* Scroll Indicator */}
       <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
         <div className="w-6 h-10 border-2 border-white/30 rounded-full flex justify-center">
