@@ -141,9 +141,12 @@ const StartupsSection = () => {
                   Visiter le site
                 </a>
               ) : (
-                <button className="w-full bg-gradient-to-r from-emerald-500 to-teal-600 text-white py-3 rounded-lg font-semibold hover:from-emerald-600 hover:to-teal-700 transition-all duration-300 group-hover:shadow-lg">
+                <a
+                  href="mailto:mauristartups@gmail.com"
+                  className="block w-full bg-gradient-to-r from-emerald-500 to-teal-600 text-white py-3 rounded-lg font-semibold hover:from-emerald-600 hover:to-teal-700 transition-all duration-300 group-hover:shadow-lg text-center"
+                >
                   En savoir plus
-                </button>
+                </a>
               )}
             </div>
           ))}
@@ -165,9 +168,12 @@ const StartupsSection = () => {
                 <p className="text-blue-200 mb-6">
                   Rejoignez notre communauté d'entrepreneurs innovants
                 </p>
-                <button className="bg-gradient-to-r from-emerald-500 to-teal-600 text-white px-8 py-4 rounded-lg font-semibold hover:from-emerald-600 hover:to-teal-700 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1">
+                <a
+                  href="#adhesion"
+                  className="inline-block bg-gradient-to-r from-emerald-500 to-teal-600 text-white px-8 py-4 rounded-lg font-semibold hover:from-emerald-600 hover:to-teal-700 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1"
+                >
                   Devenir Membre
-                </button>
+                </a>
               </div>
             </div>
           </div>
@@ -177,9 +183,12 @@ const StartupsSection = () => {
             <p className="text-xl text-blue-200 mb-8">
               Rejoignez notre communauté d'entrepreneurs innovants
             </p>
-            <button className="bg-gradient-to-r from-emerald-500 to-teal-600 text-white px-8 py-4 rounded-lg font-semibold hover:from-emerald-600 hover:to-teal-700 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1">
+            <a
+              href="#adhesion"
+              className="inline-block bg-gradient-to-r from-emerald-500 to-teal-600 text-white px-8 py-4 rounded-lg font-semibold hover:from-emerald-600 hover:to-teal-700 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1"
+            >
               Devenir Membre
-            </button>
+            </a>
           </div>
         )}
       </div>

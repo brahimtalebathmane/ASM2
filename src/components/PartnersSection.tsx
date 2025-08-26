@@ -127,13 +127,13 @@ const PartnersSection = () => {
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a
-              href="mailto:mauristartups@gmail.com"
+              href="mailto:mauristartups@gmail.com?subject=Demande de Partenariat"
               className="inline-block bg-gradient-to-r from-emerald-500 to-teal-600 text-white px-8 py-4 rounded-lg font-semibold hover:from-emerald-600 hover:to-teal-700 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1 text-center"
             >
               Devenir Partenaire
             </a>
             <a
-              href="mailto:mauristartups@gmail.com"
+              href="#contact"
               className="inline-block border-2 border-white/30 text-white px-8 py-4 rounded-lg font-semibold hover:bg-white/10 transition-all duration-300 backdrop-blur-sm text-center"
             >
               En savoir plus

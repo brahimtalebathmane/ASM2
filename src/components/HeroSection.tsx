@@ -72,7 +72,7 @@ const HeroSection = () => {
 
             <div className="flex flex-col sm:flex-row gap-6 mb-16">
               <a
-                href="mailto:mauristartups@gmail.com"
+                href="#adhesion"
                 className="group bg-gradient-to-r from-green-500 to-green-600 text-white px-8 py-4 rounded-lg font-bold text-lg hover:from-green-600 hover:to-green-700 transition-all duration-300 shadow-2xl hover:shadow-green-500/25 transform hover:-translate-y-2 flex items-center justify-center space-x-3"
               >
                 <span>{heroContent.primaryButtonText || "Devenir Membre"}</span>
@@ -80,7 +80,7 @@ const HeroSection = () => {
               </a>
               
               <a
-                href="mailto:mauristartups@gmail.com"
+                href="#startups"
                 className="border-2 border-white/30 text-white px-8 py-4 rounded-lg font-bold text-lg hover:bg-white/10 transition-all duration-300 backdrop-blur-sm hover:border-green-400 text-center"
               >
                 {heroContent.secondaryButtonText || "Découvrir l'Écosystème"}

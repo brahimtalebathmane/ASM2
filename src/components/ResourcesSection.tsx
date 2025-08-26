@@ -126,12 +126,11 @@ const ResourcesSection = () => {
 
                         {/* Download Button */}
                         <a
-                          href={resource.file}
-                          download
+                          href="mailto:mauristartups@gmail.com?subject=Demande de Ressource: " + resource.title}
                           className="group/btn flex items-center space-x-2 bg-gradient-to-r from-emerald-500 to-teal-600 text-white px-6 py-3 rounded-lg font-semibold hover:from-emerald-600 hover:to-teal-700 transition-all duration-300 shadow-lg hover:shadow-xl"
                         >
                           <Download className="w-4 h-4 group-hover/btn:translate-y-0.5 transition-transform" />
-                          <span>Télécharger</span>
+                          <span>Demander</span>
                         </a>
                       </div>
                     </div>
@@ -184,9 +183,12 @@ const ResourcesSection = () => {
               <p className="text-blue-200 mb-4 text-sm">
                 Consultez notre FAQ ou contactez notre équipe
               </p>
-              <button className="bg-gradient-to-r from-emerald-500 to-teal-600 text-white px-6 py-2 rounded-lg font-semibold hover:from-emerald-600 hover:to-teal-700 transition-all duration-300 shadow-lg hover:shadow-xl">
+              <a
+                href="mailto:mauristartups@gmail.com?subject=Demande d'aide"
+                className="inline-block bg-gradient-to-r from-emerald-500 to-teal-600 text-white px-6 py-2 rounded-lg font-semibold hover:from-emerald-600 hover:to-teal-700 transition-all duration-300 shadow-lg hover:shadow-xl"
+              >
                 Obtenir de l'aide
-              </button>
+              </a>
             </div>
           </div>
         </div>

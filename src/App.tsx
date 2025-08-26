@@ -3,7 +3,6 @@ import { CMSProvider } from './components/CMSProvider';
 import NetlifyIdentity from './components/NetlifyIdentity';
 import Header from './components/Header';
 import HeroSection from './components/HeroSection';
-import AboutSection from './components/AboutSection';
 import StartupsSection from './components/StartupsSection';
 import EventsSection from './components/EventsSection';
 import NewsSection from './components/NewsSection';
@@ -21,7 +20,6 @@ function App() {
         <Header />
         <main>
           <HeroSection />
-          <AboutSection />
           <StartupsSection />
           <EventsSection />
           <NewsSection />

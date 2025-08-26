@@ -122,14 +122,14 @@ const MembershipSection = () => {
 
                 {/* CTA */}
                 <a
-                  href="mailto:mauristartups@gmail.com"
+                  href={plan.popular ? "mailto:mauristartups@gmail.com?subject=Adhésion Plan " + plan.name : "mailto:mauristartups@gmail.com?subject=Information Plan " + plan.name}
                   className={`w-full py-4 rounded-lg font-bold text-lg transition-all duration-300 flex items-center justify-center space-x-2 ${
                     plan.popular
                       ? 'bg-gradient-to-r from-emerald-500 to-emerald-600 text-white hover:from-emerald-600 hover:to-emerald-700 shadow-lg hover:shadow-xl'
                       : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                   }`}
                 >
-                  <span>Choisir ce plan</span>
+                  <span>{plan.popular ? 'Choisir ce plan' : 'En savoir plus'}</span>
                   <ArrowRight className="w-5 h-5" />
                 </a>
               </div>

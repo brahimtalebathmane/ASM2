@@ -24,15 +24,6 @@ const Header = () => {
 
   const menuItems = [
     { label: 'Accueil', href: '#accueil' },
-    { 
-      label: 'À propos', 
-      href: '#apropos',
-      dropdown: [
-        { label: 'Notre Histoire', href: '#histoire' },
-        { label: 'Notre Équipe', href: '#equipe' },
-        { label: 'Nos Statuts', href: '#statuts' }
-      ]
-    },
     { label: 'Startups Membres', href: '#startups' },
     { label: 'Événements', href: '#evenements' },
     { label: 'Actualités', href: '#actualites' },
