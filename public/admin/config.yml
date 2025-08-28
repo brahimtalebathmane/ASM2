@@ -100,6 +100,9 @@ collections:
               - {label: "Date", name: "date", widget: "datetime"}
               - {label: "Location", name: "location", widget: "string"}
               - {label: "Description", name: "description", widget: "markdown"}
+              - {label: "Event Image", name: "image", widget: "image", required: false}
+              - {label: "Time", name: "time", widget: "string", required: false}
+              - {label: "Expected Attendees", name: "attendees", widget: "number", required: false}
 
   - name: "news"
     label: "News & Articles"
