@@ -14,7 +14,7 @@ export const useDynamicContent = (collection: string) => {
       setLoading(true);
       setError(null);
 
-      // Add cache busting parameter (correct template literal)
+      // Add cache busting parameter
       const cacheBuster = ?v=${Date.now()}&t=${Math.random()};
       const response = await fetch(/data/${collection}.json${cacheBuster});
       
@@ -23,7 +23,7 @@ export const useDynamicContent = (collection: string) => {
       }
 
       const text = await response.text();
-      
+
       // Check if we got HTML instead of JSON (404 page)
       if (text.trim().startsWith('<!DOCTYPE html>') || text.trim().startsWith('<html')) {
         console.warn(Got HTML response for ${collection}, using fallback data);
@@ -33,10 +33,10 @@ export const useDynamicContent = (collection: string) => {
 
       try {
         const jsonData = JSON.parse(text);
-        
+
         // Extract the array from the JSON structure based on collection type
         let items: ContentItem[] = [];
-        
+
         switch (collection) {
           case 'startups':
             items = jsonData.startups || [];
@@ -56,19 +56,18 @@ export const useDynamicContent = (collection: string) => {
           default:
             items = Array.isArray(jsonData) ? jsonData : (jsonData ? [jsonData] : []);
         }
-        
+
         // Add unique IDs if not present
         const itemsWithIds = items.map((item, index) => ({
           ...item,
           id: item.id || ${collection}-${index}
         }));
-        
+
         setData(itemsWithIds);
       } catch (parseError) {
         console.error(Failed to parse JSON for ${collection}:, parseError);
         setData(getFallbackData(collection));
       }
-
     } catch (err) {
       console.error(Error loading ${collection}:, err);
       setError(err instanceof Error ? err.message : 'Unknown error');
@@ -107,7 +106,6 @@ const getFallbackData = (collection: string): ContentItem[] => {
           url: 'https://example.com'
         }
       ];
-
     case 'events':
       return [
         {
@@ -118,7 +116,6 @@ const getFallbackData = (collection: string): ContentItem[] => {
           description: 'Description de l\'événement exemple'
         }
       ];
-
     case 'news':
       return [
         {
@@ -129,7 +126,6 @@ const getFallbackData = (collection: string): ContentItem[] => {
           content: 'Contenu de l\'article exemple'
         }
       ];
-
     case 'partners':
       return [
         {
@@ -139,7 +135,6 @@ const getFallbackData = (collection: string): ContentItem[] => {
           url: 'https://example.com'
         }
       ];
-
     case 'resources':
       return [
         {
@@ -150,7 +145,6 @@ const getFallbackData = (collection: string): ContentItem[] => {
           description: 'Description de la ressource exemple'
         }
       ];
-
     default:
       return [];
   }
