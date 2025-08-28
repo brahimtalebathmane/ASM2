@@ -1,28 +1,9 @@
-{
-  "title": "Qui sommes-nous?",
-  "description": "La Mauritanian Startups Association est née de la volonté de fédérer, représenter et propulser les entrepreneurs innovants du pays. Nous accompagnons les startups à chaque étape de leur développement, facilitons les partenariats stratégiques, et plaidons pour un cadre réglementaire favorable à l’innovation. ",
-  "extendedDescription": "Notre vision :\nNous croyons en une Mauritanie audacieuse, connectée et compétitive. Une nation où les idées prennent vie, où les talents s’épanouissent, et où les Startups deviennent des moteurs de croissance durable. À travers nos actions, nous visons à positionner le pays comme un pôle régional d’innovation, ouvert aux collaborations internationales et aux investissements d’avenir.\n\n ",
-  "image": "/images/uploads/522996020_1046509297675566_3768455866184234217_n.jpg",
-  "missions": [
-    {
-      "title": "Fédération",
-      "description": "Fédérer tout l'écosystème Tech en une communauté forte. Start-ups, FabLab, Investisseurs et incubateurs pour parler d'une seule et même voix aux autorités.",
-      "icon": "Target"
-    },
-    {
-      "title": "Networking & Lobbying",
-      "description": "Se positionner comme interlocuteur de référence pour les autorités et les bailleurs. Accentuer le lobbying nécessaire pour la mise en place d'un cadre réglementaire en Mauritanie.",
-      "icon": "Users"
-    },
-    {
-      "title": "Formation",
-      "description": "Apporter à tous les appels à projets et programmes de renforcement de capacités notre expérience pour améliorer la compétitivité des Start-up mauritaniennes.",
-      "icon": "Lightbulb"
-    },
-    {
-      "title": "Innovation",
-      "description": "Promouvoir l'innovation technologique et accompagner les entrepreneurs dans leurs projets de transformation digitale pour un impact durable.",
-      "icon": "Award"
-    }
-  ]
-}
+[
+  {
+    "title": "À propos",
+    "description": "Nous soutenons l’écosystème des startups en Mauritanie...",
+    "mission": "Promouvoir l’esprit entrepreneurial et accompagner les startups.",
+    "values": ["Innovation", "Transparence", "Collaboration", "Engagement communautaire"],
+    "image": "https://i.postimg.cc/GppXFY5g/18.png"
+  }
+]
