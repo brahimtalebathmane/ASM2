@@ -15,18 +15,18 @@ export const useDynamicContent = (collection: string) => {
       setError(null);
 
       // Add cache busting parameter (correct Template Literal)
-      const cacheBuster = ?v=${Date.now()}&t=${Math.random()};
-      const response = await fetch(/data/${collection}.json${cacheBuster});
+      const cacheBuster = `?v=${Date.now()}&t=${Math.random()}`;
+      const response = await fetch(`/data/${collection}.json${cacheBuster}`);
       
       if (!response.ok) {
-        throw new Error(Failed to load ${collection}: ${response.status});
+        throw new Error(`Failed to load ${collection}: ${response.status}`);
       }
 
       const text = await response.text();
       
       // Check if we got HTML instead of JSON (404 page)
       if (text.trim().startsWith('<!DOCTYPE html>') || text.trim().startsWith('<html')) {
-        console.warn(Got HTML response for ${collection}, using fallback data);
+        console.warn(`Got HTML response for ${collection}, using fallback data`);
         setData(getFallbackData(collection));
         return;
       }
@@ -60,17 +60,17 @@ export const useDynamicContent = (collection: string) => {
         // Add unique IDs if not present
         const itemsWithIds = items.map((item, index) => ({
           ...item,
-          id: item.id || ${collection}-${index}
+          id: item.id || `${collection}-${index}`
         }));
         
         setData(itemsWithIds);
       } catch (parseError) {
-        console.error(Failed to parse JSON for ${collection}:, parseError);
+        console.error(`Failed to parse JSON for ${collection}:`, parseError);
         setData(getFallbackData(collection));
       }
 
     } catch (err) {
-      console.error(Error loading ${collection}:, err);
+      console.error(`Error loading ${collection}:`, err);
       setError(err instanceof Error ? err.message : 'Unknown error');
       setData(getFallbackData(collection));
     } finally {
