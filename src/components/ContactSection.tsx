@@ -32,7 +32,7 @@ const ContactSection = () => {
     {
       icon: <Mail className="w-6 h-6" />,
       title: "Email",
-      content: "depanapp222@gmail.com",
+      content: "mauristartups@gmail.com",
       subtitle: "Réponse sous 24h"
     },
     {
