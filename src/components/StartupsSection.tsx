@@ -1,20 +1,15 @@
 import React, { useState } from 'react';
-import { Search, Filter, MapPin, Users, ExternalLink } from 'lucide-react';
+import { Search, Users, ExternalLink } from 'lucide-react';
 import { useDynamicContent } from '../hooks/useDynamicContent';
 
 const StartupsSection = () => {
   const { data: startups, loading } = useDynamicContent('startups');
-  const [selectedSector, setSelectedSector] = useState('Tous');
   const [searchTerm, setSearchTerm] = useState('');
 
-  const sectors = ['Tous', 'FinTech', 'EdTech', 'HealthTech', 'AgriTech', 'E-commerce', 'SaaS'];
-
-  const filteredStartups = startups.filter(startup => {
-    const matchesSector = selectedSector === 'Tous' || startup.sector === selectedSector;
-    const matchesSearch = startup.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         (startup.description || '').toLowerCase().includes(searchTerm.toLowerCase());
-    return matchesSector && matchesSearch;
-  });
+  const filteredStartups = startups.filter(startup =>
+    startup.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    (startup.description || '').toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
   if (loading) {
     return (
@@ -43,9 +38,8 @@ const StartupsSection = () => {
           </p>
         </div>
 
-        {/* Filters */}
-        <div className="flex flex-col lg:flex-row gap-6 mb-12">
-          {/* Search */}
+        {/* Search */}
+        <div className="flex mb-12">
           <div className="flex-1 relative">
             <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
             <input
@@ -55,20 +49,6 @@ const StartupsSection = () => {
               onChange={(e) => setSearchTerm(e.target.value)}
               className="w-full pl-12 pr-4 py-3 bg-gray-50 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
             />
-          </div>
-
-          {/* Sector Filter */}
-          <div className="flex items-center space-x-2">
-            <Filter className="text-gray-400 w-5 h-5" />
-            <select
-              value={selectedSector}
-              onChange={(e) => setSelectedSector(e.target.value)}
-              className="px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
-            >
-              {sectors.map(sector => (
-                <option key={sector} value={sector}>{sector}</option>
-              ))}
-            </select>
           </div>
         </div>
 
@@ -88,9 +68,6 @@ const StartupsSection = () => {
                     <h3 className="text-xl font-bold text-gray-900 group-hover:text-emerald-600 transition-colors">
                       {startup.name}
                     </h3>
-                    <span className="text-sm text-emerald-600 bg-emerald-50 px-2 py-1 rounded-full">
-                      {startup.sector}
-                    </span>
                   </div>
                 </div>
                 <ExternalLink className="w-5 h-5 text-gray-400 group-hover:text-emerald-600 transition-colors" />
@@ -103,34 +80,21 @@ const StartupsSection = () => {
 
               {/* Info */}
               <div className="space-y-3 mb-6">
-                <div className="flex items-center space-x-2 text-sm text-gray-600">
-                  <Users className="w-4 h-4" />
-                  <span>Fondateur: {startup.founder}</span>
-                </div>
-                <div className="flex items-center space-x-2 text-sm text-gray-600">
-                  <Users className="w-4 h-4" />
-                  <span>Employés: {startup.employees}</span>
-                </div>
-                {startup.sector && (
-                  <span className="text-sm text-emerald-600 bg-emerald-50 px-2 py-1 rounded-full">
-                    {startup.sector}
-                  </span>
+                {startup.founder && (
+                  <div className="flex items-center space-x-2 text-sm text-gray-600">
+                    <Users className="w-4 h-4" />
+                    <span>Fondateur: {startup.founder}</span>
+                  </div>
+                )}
+                {startup.employees && (
+                  <div className="flex items-center space-x-2 text-sm text-gray-600">
+                    <Users className="w-4 h-4" />
+                    <span>Employés: {startup.employees}</span>
+                  </div>
                 )}
               </div>
 
               {/* URL */}
-              {startup.url && (
-                <div className="mb-6">
-                  <div className="flex items-center space-x-2 text-sm text-gray-600">
-                    <ExternalLink className="w-4 h-4" />
-                    <a href={startup.url} target="_blank" rel="noopener noreferrer" className="text-emerald-600 hover:text-emerald-700">
-                      Visiter le site
-                    </a>
-                  </div>
-                </div>
-              )}
-
-              {/* CTA */}
               {startup.url ? (
                 <a
                   href={startup.url}
@@ -151,46 +115,6 @@ const StartupsSection = () => {
             </div>
           ))}
         </div>
-
-        {/* CTA Section */}
-        {filteredStartups.length === 0 ? (
-          <div className="text-center py-16">
-            <div className="max-w-md mx-auto">
-              <div className="w-24 h-24 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-6">
-                <Users className="w-12 h-12 text-gray-400" />
-              </div>
-              <h3 className="text-2xl font-bold text-gray-900 mb-4">Aucune startup pour le moment</h3>
-              <p className="text-gray-600 mb-8">
-                Les startups membres apparaîtront ici une fois ajoutées via le CMS.
-              </p>
-              <div className="bg-gradient-to-r from-blue-900 to-blue-800 rounded-2xl p-8 text-white">
-                <h4 className="text-xl font-bold mb-4">Votre startup n'est pas listée ?</h4>
-                <p className="text-blue-200 mb-6">
-                  Rejoignez notre communauté d'entrepreneurs innovants
-                </p>
-                <a
-                  href="#adhesion"
-                  className="inline-block bg-gradient-to-r from-emerald-500 to-teal-600 text-white px-8 py-4 rounded-lg font-semibold hover:from-emerald-600 hover:to-teal-700 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1"
-                >
-                  Devenir Membre
-                </a>
-              </div>
-            </div>
-          </div>
-        ) : (
-          <div className="mt-16 text-center bg-gradient-to-r from-blue-900 to-blue-800 rounded-3xl p-12 text-white">
-            <h3 className="text-3xl font-bold mb-4">Votre startup n'est pas listée ?</h3>
-            <p className="text-xl text-blue-200 mb-8">
-              Rejoignez notre communauté d'entrepreneurs innovants
-            </p>
-            <a
-              href="#adhesion"
-              className="inline-block bg-gradient-to-r from-emerald-500 to-teal-600 text-white px-8 py-4 rounded-lg font-semibold hover:from-emerald-600 hover:to-teal-700 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1"
-            >
-              Devenir Membre
-            </a>
-          </div>
-        )}
       </div>
     </section>
   );
