@@ -117,7 +117,7 @@ const AboutSection = () => {
                   <div className="w-3 h-3 bg-emerald-500 rounded-full animate-pulse"></div>
                   <div>
                     <p className="text-sm font-bold text-gray-800">Association Active</p>
-                    <p className="text-xs text-gray-600">Depuis 2020</p>
+                    <p className="text-xs text-gray-600">Depuis 2024</p>
                   </div>
                 </div>
               </div>
