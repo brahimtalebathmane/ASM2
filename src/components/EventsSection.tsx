@@ -5,8 +5,11 @@ import { useDynamicContent } from '../hooks/useDynamicContent';
 const EventsSection = () => {
   const { data: allEvents, loading } = useDynamicContent('events');
   const [activeTab, setActiveTab] = useState('upcoming');
+  const [selectedEvent, setSelectedEvent] = useState<any>(null); // الحدث المختار للـ modal
 
-  // تصنيف الأحداث حسب التاريخ
+  const openModal = (event: any) => setSelectedEvent(event);
+  const closeModal = () => setSelectedEvent(null);
+
   const now = new Date();
   const upcomingEvents = allEvents.filter(e => new Date(e.date) >= now);
   const pastEvents = allEvents.filter(e => new Date(e.date) < now);
@@ -106,19 +109,57 @@ const EventsSection = () => {
                     )}
                   </div>
 
-                  <a
-                    href="mailto:mauristartups@gmail.com"
+                  <button
+                    onClick={() => setSelectedEvent(event)}
                     className="group/btn w-full bg-gradient-to-r from-emerald-500 to-blue-600 text-white py-3 rounded-lg font-semibold hover:from-emerald-600 hover:to-blue-700 transition-all duration-300 flex items-center justify-center space-x-2"
                   >
                     <span>En savoir plus</span>
                     <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
-                  </a>
+                  </button>
                 </div>
               </div>
             ))}
           </div>
         )}
       </div>
+
+      {/* Modal */}
+      {selectedEvent && (
+        <div
+          className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
+          onClick={() => setSelectedEvent(null)}
+        >
+          <div
+            className="bg-white rounded-lg max-w-3xl w-full p-6 relative"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button
+              onClick={() => setSelectedEvent(null)}
+              className="absolute top-4 right-4 text-gray-500 hover:text-gray-900 font-bold text-xl"
+            >
+              &times;
+            </button>
+
+            <h2 className="text-2xl font-bold mb-4">{selectedEvent.title}</h2>
+            {selectedEvent.image && (
+              <img
+                src={selectedEvent.image}
+                alt={selectedEvent.title}
+                className="w-full h-64 object-cover rounded mb-4"
+              />
+            )}
+            <div className="text-gray-700 mb-4">
+              <p>{selectedEvent.description}</p>
+            </div>
+            <div className="text-sm text-gray-500">
+              <p>Lieu: {selectedEvent.location}</p>
+              <p>Date: {new Date(selectedEvent.date).toLocaleDateString('fr-FR')}</p>
+              {selectedEvent.time && <p>Heure: {selectedEvent.time}</p>}
+              {selectedEvent.attendees && <p>Participants: {selectedEvent.attendees}</p>}
+            </div>
+          </div>
+        </div>
+      )}
     </section>
   );
 };
