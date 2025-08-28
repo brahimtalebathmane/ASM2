@@ -331,7 +331,7 @@ const EventsSection = () => {
               {/* Modal Actions */}
               <div className="flex flex-col sm:flex-row gap-4 mt-8 pt-6 border-t border-gray-200">
                 <a
-                  href="mailto:mauristartups@gmail.com?subject=Inscription événement: " + selectedEvent.title}
+                  href={"mailto:mauristartups@gmail.com?subject=Inscription événement: " + selectedEvent.title}
                   className="flex-1 bg-gradient-to-r from-emerald-500 to-teal-600 text-white py-3 px-6 rounded-lg font-semibold hover:from-emerald-600 hover:to-teal-700 transition-all duration-300 shadow-lg hover:shadow-xl text-center"
                 >
                   S'inscrire à l'événement
