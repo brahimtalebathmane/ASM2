@@ -1,14 +1,15 @@
 import React, { useState } from 'react';
-import { Calendar, Clock, MapPin, Users, ArrowRight } from 'lucide-react';
+import { Calendar, Clock, Users, ArrowRight } from 'lucide-react';
 import { useDynamicContent } from '../hooks/useDynamicContent';
 
 const EventsSection = () => {
   const { data: allEvents, loading } = useDynamicContent('events');
   const [activeTab, setActiveTab] = useState('upcoming');
 
-  const upcomingEvents = allEvents.filter(event => event.status === 'upcoming');
-  const pastEvents = allEvents.filter(event => event.status === 'past');
-
+  // تصنيف الأحداث حسب التاريخ
+  const now = new Date();
+  const upcomingEvents = allEvents.filter(e => new Date(e.date) >= now);
+  const pastEvents = allEvents.filter(e => new Date(e.date) < now);
   const currentEvents = activeTab === 'upcoming' ? upcomingEvents : pastEvents;
 
   if (loading) {
@@ -33,9 +34,6 @@ const EventsSection = () => {
             Événements <span className="text-emerald-500">&</span> Actualités
           </h2>
           <div className="w-20 h-1 bg-gradient-to-r from-emerald-500 to-teal-500 mx-auto mb-6"></div>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Découvrez l'actualité et les innovations du secteur technologique en Mauritanie, où startups et entrepreneurs redéfinissent l'avenir numérique du pays.
-          </p>
         </div>
 
         {/* Tabs */}
@@ -67,76 +65,47 @@ const EventsSection = () => {
         {/* Events Grid */}
         {currentEvents.length === 0 ? (
           <div className="text-center py-16">
-            <div className="max-w-md mx-auto">
-              <div className="w-24 h-24 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-6">
-                <Calendar className="w-12 h-12 text-gray-400" />
-              </div>
-              <h3 className="text-2xl font-bold text-gray-900 mb-4">
-                Aucun événement {activeTab === 'upcoming' ? 'à venir' : 'passé'} pour le moment
-              </h3>
-              <p className="text-gray-600">
-                .
-              </p>
-            </div>
+            <h3 className="text-2xl font-bold text-gray-900 mb-4">
+              Aucun événement {activeTab === 'upcoming' ? 'à venir' : 'passé'} pour le moment
+            </h3>
           </div>
         ) : (
           <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-8">
             {currentEvents.map((event) => (
               <div key={event.id} className="group bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 overflow-hidden">
-                {/* Image */}
                 <div className="relative h-48 overflow-hidden">
-                  <img
-                    src={event.image}
-                    alt={event.title}
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
-                  />
-                  <div className="absolute top-4 left-4 bg-emerald-500 text-white px-3 py-1 rounded-full text-sm font-semibold">
-                    {event.type}
-                  </div>
-                  {activeTab === 'upcoming' && (
-                    <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm rounded-lg px-3 py-1">
-                      <div className="flex items-center space-x-1">
-                        <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
-                        <span className="text-xs font-semibold text-gray-800">À venir</span>
-                      </div>
-                    </div>
+                  {event.image && (
+                    <img
+                      src={event.image}
+                      alt={event.title}
+                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                    />
                   )}
                 </div>
-
-                {/* Content */}
                 <div className="p-6">
                   <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-emerald-600 transition-colors">
                     {event.title}
                   </h3>
-                  
-                  <p className="text-gray-600 mb-4 line-clamp-2">
-                    {event.description}
-                  </p>
-
-                  {/* Event Details */}
+                  <p className="text-gray-600 mb-4">{event.description}</p>
                   <div className="space-y-2 mb-6">
                     <div className="flex items-center space-x-2 text-sm text-gray-600">
                       <Calendar className="w-4 h-4 text-emerald-500" />
-                      <span>{event.date}</span>
+                      <span>{new Date(event.date).toLocaleDateString('fr-FR')}</span>
                     </div>
-                    
                     {event.time && (
                       <div className="flex items-center space-x-2 text-sm text-gray-600">
                         <Clock className="w-4 h-4 text-emerald-500" />
                         <span>{event.time}</span>
                       </div>
                     )}
-                    <div className="flex items-center space-x-2 text-sm text-gray-600">
-                      <Clock className="w-4 h-4 text-emerald-500" />
-                      <span>{new Date(event.date).toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' })}</span>
-                    </div>
-                    <div className="flex items-center space-x-2 text-sm text-gray-600">
-                      <Users className="w-4 h-4 text-emerald-500" />
-                      <span>{event.attendees} participants</span>
-                    </div>
+                    {event.attendees && (
+                      <div className="flex items-center space-x-2 text-sm text-gray-600">
+                        <Users className="w-4 h-4 text-emerald-500" />
+                        <span>{event.attendees} participants</span>
+                      </div>
+                    )}
                   </div>
 
-                  {/* CTA */}
                   <a
                     href="mailto:mauristartups@gmail.com"
                     className="group/btn w-full bg-gradient-to-r from-emerald-500 to-blue-600 text-white py-3 rounded-lg font-semibold hover:from-emerald-600 hover:to-blue-700 transition-all duration-300 flex items-center justify-center space-x-2"
@@ -149,20 +118,6 @@ const EventsSection = () => {
             ))}
           </div>
         )}
-
-        {/* Newsletter CTA */}
-        <div className="mt-16 bg-gradient-to-r from-blue-900 to-blue-800 rounded-3xl p-12 text-white text-center">
-          <h3 className="text-3xl font-bold mb-4">Restez informé</h3>
-          <p className="text-xl text-blue-200 mb-8">
-            Contactez-nous pour ne manquer aucun événement et recevoir nos actualités
-          </p>
-          <a
-            href="mailto:mauristartups@gmail.com"
-            className="inline-block bg-gradient-to-r from-emerald-500 to-teal-600 text-white px-8 py-4 rounded-lg font-semibold hover:from-emerald-600 hover:to-teal-700 transition-all duration-300 shadow-lg hover:shadow-xl"
-          >
-            Nous contacter
-          </a>
-        </div>
       </div>
     </section>
   );
