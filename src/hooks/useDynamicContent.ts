@@ -15,8 +15,8 @@ export const useDynamicContent = (collection: string) => {
       setError(null);
 
       // Add cache busting parameter (correct template literal)
-      const cacheBuster = ?v=${Date.now()}&t=${Math.random()};
-      const response = await fetch(/data/${collection}.json${cacheBuster});
+      const cacheBuster = `?v=${Date.now()}&t=${Math.random()}`;
+      const response = await fetch(`/data/${collection}.json${cacheBuster}`);
 
       if (!response.ok) {
         throw new Error(Failed to load ${collection}: ${response.status});
