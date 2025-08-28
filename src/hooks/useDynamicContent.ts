@@ -17,13 +17,13 @@ export const useDynamicContent = (collection: string) => {
       // Add cache busting parameter (correct template literal)
       const cacheBuster = ?v=${Date.now()}&t=${Math.random()};
       const response = await fetch(/data/${collection}.json${cacheBuster});
-
+      
       if (!response.ok) {
         throw new Error(Failed to load ${collection}: ${response.status});
       }
 
       const text = await response.text();
-
+      
       // Check if we got HTML instead of JSON (404 page)
       if (text.trim().startsWith('<!DOCTYPE html>') || text.trim().startsWith('<html')) {
         console.warn(Got HTML response for ${collection}, using fallback data);
@@ -33,10 +33,10 @@ export const useDynamicContent = (collection: string) => {
 
       try {
         const jsonData = JSON.parse(text);
-
+        
         // Extract the array from the JSON structure based on collection type
         let items: ContentItem[] = [];
-
+        
         switch (collection) {
           case 'startups':
             items = jsonData.startups || [];
@@ -56,13 +56,13 @@ export const useDynamicContent = (collection: string) => {
           default:
             items = Array.isArray(jsonData) ? jsonData : (jsonData ? [jsonData] : []);
         }
-
+        
         // Add unique IDs if not present
         const itemsWithIds = items.map((item, index) => ({
           ...item,
           id: item.id || ${collection}-${index}
         }));
-
+        
         setData(itemsWithIds);
       } catch (parseError) {
         console.error(Failed to parse JSON for ${collection}:, parseError);
