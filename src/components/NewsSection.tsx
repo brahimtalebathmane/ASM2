@@ -5,6 +5,7 @@ import { useDynamicContent } from '../hooks/useDynamicContent';
 const NewsSection = () => {
   const { data: news, loading } = useDynamicContent('news');
   const [selectedCategory, setSelectedCategory] = useState('Tous');
+  const [expandedArticle, setExpandedArticle] = useState<string | null>(null);
 
   const categories = ['Tous', 'Innovations', 'Financements', 'Événements', 'Portraits'];
 
@@ -92,48 +93,31 @@ const NewsSection = () => {
                     {article.title}
                   </h3>
                   
-                  <p className="text-gray-600 mb-4 line-clamp-3">
-                    {article.excerpt}
+                  <p className={`text-gray-600 mb-4 ${expandedArticle === article.id ? '' : 'line-clamp-3'}`}>
+                    {expandedArticle === article.id ? article.content : article.excerpt}
                   </p>
 
                   {/* Meta */}
                   <div className="flex items-center justify-between text-sm text-gray-500 mb-4">
-                    <div className="flex items-center space-x-4">
-                      <div className="flex items-center space-x-1">
-                        <Calendar className="w-4 h-4" />
-                        <span>{new Date(article.date).toLocaleDateString('fr-FR')}</span>
-                      </div>
+                    <div className="flex items-center space-x-1">
+                      <Calendar className="w-4 h-4" />
+                      <span>{new Date(article.date).toLocaleDateString('fr-FR')}</span>
                     </div>
                   </div>
 
                   {/* CTA */}
-                  <a
-                    href="mailto:mauristartups@gmail.com"
-                    className="group/btn w-full bg-gradient-to-r from-emerald-500 to-blue-600 text-white py-3 rounded-lg font-semibold hover:from-emerald-600 hover:to-blue-700 transition-all duration-300 flex items-center justify-center space-x-2"
+                  <button
+                    onClick={() => setExpandedArticle(expandedArticle === article.id ? null : article.id)}
+                    className="w-full bg-gradient-to-r from-emerald-500 to-blue-600 text-white py-3 rounded-lg font-semibold hover:from-emerald-600 hover:to-blue-700 transition-all duration-300 flex items-center justify-center space-x-2"
                   >
-                    <span>Lire plus</span>
-                    <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
-                  </a>
+                    <span>{expandedArticle === article.id ? 'Lire moins' : 'Lire plus'}</span>
+                    <ArrowRight className={`w-4 h-4 transition-transform ${expandedArticle === article.id ? 'rotate-90' : ''}`} />
+                  </button>
                 </div>
               </article>
             ))}
           </div>
         )}
-
-        {/* Newsletter CTA */}
-        <div className="mt-16 bg-gradient-to-r from-blue-900 to-emerald-900 rounded-3xl p-12 text-white text-center">
-          <TrendingUp className="w-16 h-16 text-emerald-400 mx-auto mb-6" />
-          <h3 className="text-3xl font-bold mb-4">Restez à la pointe de l'innovation</h3>
-          <p className="text-xl text-blue-200 mb-8 max-w-2xl mx-auto">
-            Contactez-nous pour recevoir les dernières actualités de l'écosystème startup mauritanien
-          </p>
-          <a
-            href="mailto:mauristartups@gmail.com"
-            className="inline-block bg-gradient-to-r from-emerald-500 to-emerald-600 text-white px-8 py-4 rounded-lg font-bold hover:from-emerald-600 hover:to-emerald-700 transition-all duration-300 shadow-lg hover:shadow-xl"
-          >
-            Nous contacter
-          </a>
-        </div>
       </div>
     </section>
   );
