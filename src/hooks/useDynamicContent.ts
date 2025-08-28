@@ -1,175 +1,167 @@
-import { useState, useEffect } from 'react';
+import React, { useState } from 'react';
+import { Calendar, Clock, Users, ArrowRight } from 'lucide-react';
+import { useDynamicContent } from '../hooks/useDynamicContent';
 
-interface ContentItem {
-  [key: string]: any;
-}
+const EventsSection = () => {
+  const { data: allEvents, loading } = useDynamicContent('events');
+  const [activeTab, setActiveTab] = useState('upcoming');
+  const [selectedEvent, setSelectedEvent] = useState<any>(null); // الحدث المختار للـ modal
 
-export const useDynamicContent = (collection: string) => {
-  const [data, setData] = useState<ContentItem[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+  const openModal = (event: any) => setSelectedEvent(event);
+  const closeModal = () => setSelectedEvent(null);
 
-  const loadContent = async () => {
-    try {
-      setLoading(true);
-      setError(null);
+  const now = new Date();
+  const upcomingEvents = allEvents.filter(e => new Date(e.date) >= now);
+  const pastEvents = allEvents.filter(e => new Date(e.date) < now);
+  const currentEvents = activeTab === 'upcoming' ? upcomingEvents : pastEvents;
 
-      // Add cache busting parameter (correct Template Literal)
-      const cacheBuster = `?v=${Date.now()}&t=${Math.random()}`;
-      const response = await fetch(`/data/${collection}.json${cacheBuster}`);
-      
-      if (!response.ok) {
-        throw new Error(`Failed to load ${collection}: ${response.status}`);
-      }
-
-      const text = await response.text();
-      
-      // Check if we got HTML instead of JSON (404 page)
-      if (text.trim().startsWith('<!DOCTYPE html>') || text.trim().startsWith('<html')) {
-        console.warn(`Got HTML response for ${collection}, using fallback data`);
-        setData(getFallbackData(collection));
-        return;
-      }
-
-      try {
-        const jsonData = JSON.parse(text);
-        
-        // Extract the array from the JSON structure based on collection type
-        let items: ContentItem[] = [];
-        
-        switch (collection) {
-          case 'startups':
-            items = jsonData.startups || [];
-            break;
-          case 'events':
-            items = jsonData.events || [];
-            break;
-          case 'news':
-            items = jsonData.articles || [];
-            break;
-          case 'partners':
-            items = jsonData.partners || [];
-            break;
-          case 'resources':
-            items = jsonData.resources || [];
-            break;
-          case 'about':
-            // For about section, we expect a single object, so wrap it in an array
-            items = jsonData ? [jsonData] : [];
-            break;
-          default:
-            items = Array.isArray(jsonData) ? jsonData : (jsonData ? [jsonData] : []);
-        }
-        
-        // Add unique IDs if not present
-        const itemsWithIds = items.map((item, index) => ({
-          ...item,
-          id: item.id || `${collection}-${index}`
-        }));
-        
-        setData(itemsWithIds);
-      } catch (parseError) {
-        console.error(`Failed to parse JSON for ${collection}:`, parseError);
-        setData(getFallbackData(collection));
-      }
-
-    } catch (err) {
-      console.error(`Error loading ${collection}:`, err);
-      setError(err instanceof Error ? err.message : 'Unknown error');
-      setData(getFallbackData(collection));
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  useEffect(() => {
-    loadContent();
-  }, [collection]);
-
-  // Auto-refresh every 30 seconds to catch CMS updates
-  useEffect(() => {
-    const interval = setInterval(() => {
-      loadContent();
-    }, 30000);
-
-    return () => clearInterval(interval);
-  }, [collection]);
-
-  return { data, loading, error, refetch: loadContent };
-};
-
-// Fallback data for when dynamic loading fails
-const getFallbackData = (collection: string): ContentItem[] => {
-  switch (collection) {
-    case 'startups':
-      return [
-        {
-          id: 'fallback-startup-1',
-          name: 'Startup Example',
-          logo: 'https://images.pexels.com/photos/3184360/pexels-photo-3184360.jpeg?auto=compress&cs=tinysrgb&w=200',
-          description: 'Description de la startup exemple',
-          url: 'https://example.com'
-        }
-      ];
-
-    case 'events':
-      return [
-        {
-          id: 'fallback-event-1',
-          title: 'Événement Exemple',
-          date: '2025-03-15T09:00:00.000Z',
-          location: 'Nouakchott',
-          description: 'Description de l\'événement exemple'
-        }
-      ];
-
-    case 'news':
-      return [
-        {
-          id: 'fallback-news-1',
-          title: 'Article Exemple',
-          date: '2025-01-15T10:00:00.000Z',
-          image: 'https://images.pexels.com/photos/3184360/pexels-photo-3184360.jpeg?auto=compress&cs=tinysrgb&w=800',
-          content: 'Contenu de l\'article exemple'
-        }
-      ];
-
-    case 'partners':
-      return [
-        {
-          id: 'fallback-partner-1',
-          name: 'Partenaire Exemple',
-          logo: 'https://images.pexels.com/photos/3184360/pexels-photo-3184360.jpeg?auto=compress&cs=tinysrgb&w=200',
-          url: 'https://example.com'
-        }
-      ];
-
-    case 'resources':
-      return [
-        {
-          id: 'fallback-resource-1',
-          title: 'Ressource Exemple',
-          type: 'PDF',
-          file: '/example.pdf',
-          description: 'Description de la ressource exemple'
-        }
-      ];
-
-    case 'about':
-      return [
-        {
-          id: 'fallback-about-1',
-          title: 'À propos de l\'Association Mauritanienne des Startups',
-          description: 'L\'Association Mauritanienne des Startups (MSA) est une organisation à but non lucratif dédiée au développement de l\'écosystème entrepreneurial en Mauritanie.',
-          mission: 'Notre mission est de fédérer, promouvoir et défendre les intérêts des startups mauritaniennes.',
-          values: ['Innovation', 'Collaboration', 'Excellence', 'Transparence'],
-          image: '/images/uploads/présentation-entreprise-bleu-moderne-simple.jpg'
-        }
-      ];
-
-    default:
-      return [];
+  if (loading) {
+    return (
+      <section id="evenements" className="py-20 bg-gray-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center">
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-emerald-500 mx-auto"></div>
+            <p className="mt-4 text-gray-600">Chargement des événements...</p>
+          </div>
+        </div>
+      </section>
+    );
   }
+
+  return (
+    <section id="evenements" className="py-20 bg-gray-50">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Header */}
+        <div className="text-center mb-16">
+          <h2 className="text-4xl font-bold text-gray-900 mb-4">
+            Événements <span className="text-emerald-500">&</span> Actualités
+          </h2>
+          <div className="w-20 h-1 bg-gradient-to-r from-emerald-500 to-teal-500 mx-auto mb-6"></div>
+        </div>
+
+        {/* Tabs */}
+        <div className="flex justify-center mb-12">
+          <div className="flex bg-white rounded-lg p-1 shadow-lg">
+            <button
+              onClick={() => setActiveTab('upcoming')}
+              className={`px-6 py-3 rounded-lg font-semibold transition-all duration-300 ${
+                activeTab === 'upcoming'
+                  ? 'bg-gradient-to-r from-emerald-500 to-teal-600 text-white shadow-lg'
+                  : 'text-gray-600 hover:text-emerald-600'
+              }`}
+            >
+              Événements à venir
+            </button>
+            <button
+              onClick={() => setActiveTab('past')}
+              className={`px-6 py-3 rounded-lg font-semibold transition-all duration-300 ${
+                activeTab === 'past'
+                  ? 'bg-gradient-to-r from-emerald-500 to-teal-600 text-white shadow-lg'
+                  : 'text-gray-600 hover:text-emerald-600'
+              }`}
+            >
+              Événements passés
+            </button>
+          </div>
+        </div>
+
+        {/* Events Grid */}
+        {currentEvents.length === 0 ? (
+          <div className="text-center py-16">
+            <h3 className="text-2xl font-bold text-gray-900 mb-4">
+              Aucun événement {activeTab === 'upcoming' ? 'à venir' : 'passé'} pour le moment
+            </h3>
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-8">
+            {currentEvents.map((event) => (
+              <div key={event.id} className="group bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 overflow-hidden">
+                <div className="relative h-48 overflow-hidden">
+                  {event.image && (
+                    <img
+                      src={event.image}
+                      alt={event.title}
+                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                    />
+                  )}
+                </div>
+                <div className="p-6">
+                  <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-emerald-600 transition-colors">
+                    {event.title}
+                  </h3>
+                  <p className="text-gray-600 mb-4">{event.description}</p>
+                  <div className="space-y-2 mb-6">
+                    <div className="flex items-center space-x-2 text-sm text-gray-600">
+                      <Calendar className="w-4 h-4 text-emerald-500" />
+                      <span>{new Date(event.date).toLocaleDateString('fr-FR')}</span>
+                    </div>
+                    {event.time && (
+                      <div className="flex items-center space-x-2 text-sm text-gray-600">
+                        <Clock className="w-4 h-4 text-emerald-500" />
+                        <span>{event.time}</span>
+                      </div>
+                    )}
+                    {event.attendees && (
+                      <div className="flex items-center space-x-2 text-sm text-gray-600">
+                        <Users className="w-4 h-4 text-emerald-500" />
+                        <span>{event.attendees} participants</span>
+                      </div>
+                    )}
+                  </div>
+
+                  <button
+                    onClick={() => setSelectedEvent(event)}
+                    className="group/btn w-full bg-gradient-to-r from-emerald-500 to-blue-600 text-white py-3 rounded-lg font-semibold hover:from-emerald-600 hover:to-blue-700 transition-all duration-300 flex items-center justify-center space-x-2"
+                  >
+                    <span>En savoir plus</span>
+                    <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
+                  </button>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+
+      {/* Modal */}
+      {selectedEvent && (
+        <div
+          className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
+          onClick={() => setSelectedEvent(null)}
+        >
+          <div
+            className="bg-white rounded-lg max-w-3xl w-full p-6 relative"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button
+              onClick={() => setSelectedEvent(null)}
+              className="absolute top-4 right-4 text-gray-500 hover:text-gray-900 font-bold text-xl"
+            >
+              &times;
+            </button>
+
+            <h2 className="text-2xl font-bold mb-4">{selectedEvent.title}</h2>
+            {selectedEvent.image && (
+              <img
+                src={selectedEvent.image}
+                alt={selectedEvent.title}
+                className="w-full h-64 object-cover rounded mb-4"
+              />
+            )}
+            <div className="text-gray-700 mb-4">
+              <p>{selectedEvent.description}</p>
+            </div>
+            <div className="text-sm text-gray-500">
+              <p>Lieu: {selectedEvent.location}</p>
+              <p>Date: {new Date(selectedEvent.date).toLocaleDateString('fr-FR')}</p>
+              {selectedEvent.time && <p>Heure: {selectedEvent.time}</p>}
+              {selectedEvent.attendees && <p>Participants: {selectedEvent.attendees}</p>}
+            </div>
+          </div>
+        </div>
+      )}
+    </section>
+  );
 };
 
-export default useDynamicContent;
+export default EventsSection;
