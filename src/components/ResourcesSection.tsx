@@ -4,6 +4,7 @@ import { useDynamicContent } from '../hooks/useDynamicContent';
 
 const ResourcesSection = () => {
   const { data: resources, loading } = useDynamicContent('resources');
+  const { data: webinars, loading: webinarsLoading } = useDynamicContent('webinars');
   const [activeCategory, setActiveCategory] = useState('Tous');
 
   const categories = ['Tous', 'Guides', 'Financements', 'Juridique', 'Marketing', 'Technique'];
@@ -12,34 +13,8 @@ const ResourcesSection = () => {
     activeCategory === 'Tous' || resource.category === activeCategory
   );
 
-  const webinars = [
-    {
-      id: 1,
-      title: "Lever des fonds en Mauritanie",
-      date: "20 Janvier 2025",
-      duration: "45 min",
-      speaker: "Aminata Sow, Investisseur",
-      views: 850
-    },
-    {
-      id: 2,
-      title: "Marketing digital pour startups",
-      date: "15 Janvier 2025",
-      duration: "1h 20min",
-      speaker: "Mohamed Lemine, Expert Digital",
-      views: 1200
-    },
-    {
-      id: 3,
-      title: "Construire une équipe performante",
-      date: "10 Janvier 2025",
-      duration: "55 min",
-      speaker: "Fatima Mint, CEO HealthConnect",
-      views: 670
-    }
-  ];
 
-  if (loading) {
+  if (loading || webinarsLoading) {
     return (
       <section id="ressources" className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -146,35 +121,64 @@ const ResourcesSection = () => {
               Webinaires <span className="text-emerald-500">Récents</span>
             </h3>
 
-            <div className="space-y-4">
-              {webinars.map((webinar) => (
-                <div key={webinar.id} className="group bg-gray-50 hover:bg-white border border-gray-200 rounded-xl p-4 hover:shadow-lg transition-all duration-300">
-                  <div className="flex items-start space-x-3">
-                    <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-blue-600 rounded-lg flex items-center justify-center text-white group-hover:scale-110 transition-transform duration-300">
-                      <Video className="w-5 h-5" />
-                    </div>
-                    
-                    <div className="flex-1">
-                      <h4 className="font-bold text-gray-900 mb-1 group-hover:text-emerald-600 transition-colors">
-                        {webinar.title}
-                      </h4>
-                      
-                      <p className="text-sm text-gray-600 mb-2">
-                        {webinar.speaker}
-                      </p>
-                      
-                      <div className="flex items-center space-x-4 text-xs text-gray-500">
-                        <span>{webinar.date}</span>
-                        <span>{webinar.duration}</span>
-                        <span>{webinar.views} vues</span>
-                      </div>
-                    </div>
-                    
-                    <ExternalLink className="w-4 h-4 text-gray-400 group-hover:text-emerald-600 transition-colors" />
-                  </div>
+            {webinars.length === 0 ? (
+              <div className="text-center py-8">
+                <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <Video className="w-8 h-8 text-gray-400" />
                 </div>
-              ))}
-            </div>
+                <h4 className="text-lg font-bold text-gray-900 mb-2">Aucun webinaire pour le moment</h4>
+                <p className="text-gray-600 text-sm">
+                  Les webinaires apparaîtront ici une fois ajoutés via le CMS.
+                </p>
+              </div>
+            ) : (
+              <div className="space-y-4">
+                {webinars.map((webinar) => (
+                  <div key={webinar.id} className="group bg-gray-50 hover:bg-white border border-gray-200 rounded-xl p-4 hover:shadow-lg transition-all duration-300">
+                    <div className="flex items-start space-x-3">
+                      <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-blue-600 rounded-lg flex items-center justify-center text-white group-hover:scale-110 transition-transform duration-300">
+                        <Video className="w-5 h-5" />
+                      </div>
+                      
+                      <div className="flex-1">
+                        <h4 className="font-bold text-gray-900 mb-1 group-hover:text-emerald-600 transition-colors">
+                          {webinar.title}
+                        </h4>
+                        
+                        {webinar.description && (
+                          <p className="text-sm text-gray-600 mb-2 line-clamp-2">
+                            {webinar.description}
+                          </p>
+                        )}
+                        
+                        <p className="text-sm text-gray-600 mb-2">
+                          {webinar.speaker}
+                        </p>
+                        
+                        <div className="flex items-center space-x-4 text-xs text-gray-500">
+                          <span>{webinar.date}</span>
+                          <span>{webinar.duration}</span>
+                          <span>{webinar.views} vues</span>
+                        </div>
+                      </div>
+                      
+                      {webinar.videoUrl ? (
+                        <a
+                          href={webinar.videoUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-gray-400 group-hover:text-emerald-600 transition-colors"
+                        >
+                          <ExternalLink className="w-4 h-4" />
+                        </a>
+                      ) : (
+                        <ExternalLink className="w-4 h-4 text-gray-400 group-hover:text-emerald-600 transition-colors" />
+                      )}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
 
             {/* CTA */}
             <div className="mt-8 bg-gradient-to-r from-blue-900 to-blue-800 rounded-2xl p-6 text-white text-center">

@@ -1,0 +1,34 @@
+{
+  "webinars": [
+    {
+      "id": 1,
+      "title": "Lever des fonds en Mauritanie",
+      "date": "20 Janvier 2025",
+      "duration": "45 min",
+      "speaker": "Aminata Sow, Investisseur",
+      "views": 850,
+      "videoUrl": "https://youtube.com/watch?v=example1",
+      "description": "Découvrez les stratégies et opportunités de financement pour les startups mauritaniennes avec une experte du secteur."
+    },
+    {
+      "id": 2,
+      "title": "Marketing digital pour startups",
+      "date": "15 Janvier 2025",
+      "duration": "1h 20min",
+      "speaker": "Mohamed Lemine, Expert Digital",
+      "views": 1200,
+      "videoUrl": "https://youtube.com/watch?v=example2",
+      "description": "Apprenez les meilleures pratiques du marketing digital adaptées aux startups en Mauritanie."
+    },
+    {
+      "id": 3,
+      "title": "Construire une équipe performante",
+      "date": "10 Janvier 2025",
+      "duration": "55 min",
+      "speaker": "Fatima Mint, CEO HealthConnect",
+      "views": 670,
+      "videoUrl": "https://youtube.com/watch?v=example3",
+      "description": "Les clés pour recruter, motiver et développer une équipe de talents dans l'écosystème startup mauritanien."
+    }
+  ]
+}

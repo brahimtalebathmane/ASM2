@@ -53,6 +53,9 @@ export const useDynamicContent = (collection: string) => {
           case 'resources':
             items = jsonData.resources || [];
             break;
+          case 'webinars':
+            items = jsonData.webinars || [];
+            break;
           case 'about':
             // For about section, we expect a single object, so wrap it in an array
             items = jsonData ? [jsonData] : [];

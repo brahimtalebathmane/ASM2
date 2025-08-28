@@ -150,3 +150,23 @@ collections:
               - {label: "Type", name: "type", widget: "string"}
               - {label: "File", name: "file", widget: "file"}
               - {label: "Description", name: "description", widget: "text"}
+
+  - name: "webinars"
+    label: "Webinars"
+    files:
+      - file: "public/data/webinars.json"
+        label: "Webinars Collection"
+        name: "webinars"
+        fields:
+          - label: "Webinars"
+            name: "webinars"
+            widget: "list"
+            fields:
+              - {label: "ID", name: "id", widget: "number"}
+              - {label: "Title", name: "title", widget: "string"}
+              - {label: "Date", name: "date", widget: "string"}
+              - {label: "Duration", name: "duration", widget: "string"}
+              - {label: "Speaker", name: "speaker", widget: "string"}
+              - {label: "Views", name: "views", widget: "number"}
+              - {label: "Video URL", name: "videoUrl", widget: "string"}
+              - {label: "Description", name: "description", widget: "text", required: false}
