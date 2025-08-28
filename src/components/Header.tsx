@@ -24,6 +24,7 @@ const Header = () => {
 
   const menuItems = [
     { label: 'Accueil', href: '#accueil' },
+    { label: 'À propos', href: '#apropos' },
     { label: 'Startups Membres', href: '#startups' },
     { label: 'Événements', href: '#evenements' },
     { label: 'Actualités', href: '#actualites' },

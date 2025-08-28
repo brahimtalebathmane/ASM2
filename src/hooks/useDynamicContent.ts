@@ -53,6 +53,10 @@ export const useDynamicContent = (collection: string) => {
           case 'resources':
             items = jsonData.resources || [];
             break;
+          case 'about':
+            // For about section, we expect a single object, so wrap it in an array
+            items = jsonData ? [jsonData] : [];
+            break;
           default:
             items = Array.isArray(jsonData) ? jsonData : (jsonData ? [jsonData] : []);
         }
@@ -148,6 +152,18 @@ const getFallbackData = (collection: string): ContentItem[] => {
           type: 'PDF',
           file: '/example.pdf',
           description: 'Description de la ressource exemple'
+        }
+      ];
+
+    case 'about':
+      return [
+        {
+          id: 'fallback-about-1',
+          title: 'À propos de l\'Association Mauritanienne des Startups',
+          description: 'L\'Association Mauritanienne des Startups (MSA) est une organisation à but non lucratif dédiée au développement de l\'écosystème entrepreneurial en Mauritanie.',
+          mission: 'Notre mission est de fédérer, promouvoir et défendre les intérêts des startups mauritaniennes.',
+          values: ['Innovation', 'Collaboration', 'Excellence', 'Transparence'],
+          image: '/images/uploads/présentation-entreprise-bleu-moderne-simple.jpg'
         }
       ];
 

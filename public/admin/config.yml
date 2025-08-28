@@ -30,6 +30,22 @@ collections:
               - {label: "Avatar", name: "avatar", widget: "image"}
               - {label: "Testimonial", name: "testimonial", widget: "text"}
 
+  - name: "about"
+    label: "À propos"
+    files:
+      - file: "public/data/about.json"
+        label: "À propos Content"
+        name: "about"
+        fields:
+          - {label: "Title", name: "title", widget: "string"}
+          - {label: "Description", name: "description", widget: "text"}
+          - {label: "Mission", name: "mission", widget: "text"}
+          - label: "Values"
+            name: "values"
+            widget: "list"
+            field: {label: "Value", name: "value", widget: "string"}
+          - {label: "Image", name: "image", widget: "image"}
+
   - name: "hero"
     label: "Hero Section"
     files:
