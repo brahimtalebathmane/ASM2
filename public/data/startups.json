@@ -35,6 +35,12 @@
       "logo": "/images/uploads/mauritanian-startups-association.png",
       "description": "Sting App est une plateforme numérique conçue pour connecter les fournisseurs, les entreprises et les pharmacies, facilitant ainsi les échanges commerciaux et la gestion des approvisionnements dans le secteur pharmaceutique.",
       "url": "stingapp.com"
+    },
+    {
+      "name": "AGTAALY",
+      "logo": "/images/uploads/svg-72.svg",
+      "url": "http://agtaalyvite.com",
+      "description": "Agtaaly est une plateforme mauritanienne innovante qui permet aux voyageurs de comparer les offres de plus de 60 opérateurs de transport, de réserver leurs billets en ligne et d’obtenir une confirmation numérique. Grâce à cette solution, les usagers n’ont plus besoin de se déplacer physiquement en agence, ce qui révolutionne l’expérience du voyage en Mauritanie."
     }
   ]
 }
